@@ -12,17 +12,80 @@
     tools:context=".ui.login.LoginActivity">
 
     <TextView
-        android:id="@+id/login_title"
-        android:layout_width="217dp"
+        android:id="@+id/register_title"
+        android:layout_width="220dp"
         android:layout_height="29dp"
+        android:layout_marginTop="80dp"
         android:fontFamily="@font/inter_bold"
-        android:text="Создать аккаунт"
-        android:textSize="24dp"
+        android:text="Создайте аккаунт"
         android:textAlignment="center"
-        android:visibility="visible"
         android:textColor="@color/white"
-        app:layout_constraintTop_toTopOf="parent"
+        android:textSize="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/register_group"
+        android:layout_width="327dp"
+        android:layout_height="302dp"
+        android:layout_marginTop="159dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" >
+
+        <EditText
+            android:id="@+id/profile_name_edit"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_weight="1"
+            android:hint="Придумате имя профиля"
+            android:textColorHint="@color/white"
+            android:textColor="@color/white"
+            android:textSize="16dp"
+            android:paddingStart="22dp"
+            android:background="@drawable/profile_name_edittext_modif"/>
+
+        <EditText
+            android:id="@+id/email_edit"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_weight="1"
+            android:layout_marginTop="24dp"
+            android:paddingStart="22dp"
+            android:hint="Введите почту"
+            android:textColor="@color/white"
+            android:textSize="16dp"
+            android:inputType="textEmailAddress"
+            android:background="@drawable/edit_text_modif"/>
+
+        <EditText
+            android:id="@+id/password_edit"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_weight="1"
+            android:layout_marginTop="24dp"
+            android:paddingStart="22dp"
+            android:hint="Введите пароль"
+            android:textColor="@color/white"
+            android:textSize="16dp"
+            android:inputType="textPassword"
+            android:background="@drawable/edit_text_modif"/>
+        
+        <Button
+            android:id="@+id/btn_create_account"
+            android:layout_width="match_parent"
+            android:layout_height="62dp"
+            android:layout_weight="1"
+            android:layout_marginTop="24dp"
+            android:text="Создать аккаунт"
+            android:fontFamily="@font/inter_bold"
+            android:textColor="@color/black"
+            android:textSize="16dp"
+            android:textAllCaps="false"
+            android:background="@drawable/button_main"/>
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
