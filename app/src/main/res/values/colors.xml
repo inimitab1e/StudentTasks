@@ -13,4 +13,9 @@
     <color name="email_pass_et">#696C75</color>
     <color name="gold">#F4D144</color>
     <color name="hint_gray">#696C75</color>
+    <color name="light_blue_600">#FF039BE5</color>
+    <color name="light_blue_900">#FF01579B</color>
+    <color name="light_blue_A200">#FF40C4FF</color>
+    <color name="light_blue_A400">#FF00B0FF</color>
+    <color name="black_overlay">#66000000</color>
 </resources>

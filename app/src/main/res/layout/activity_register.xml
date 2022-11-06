@@ -12,48 +12,47 @@
     tools:context=".ui.register.RegisterActivity">
 
     <TextView
-        android:id="@+id/login_title"
+        android:id="@+id/register_title"
         android:layout_width="220dp"
         android:layout_height="29dp"
         android:layout_marginTop="80dp"
         android:fontFamily="@font/inter_bold"
-        android:text="Войти в аккаунт"
+        android:text="Создайте аккаунт"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-    
-    <TextView
-        android:id="@+id/login_info"
-        android:layout_width="315dp"
-        android:layout_height="63dp"
-        android:layout_marginTop="124dp"
-        android:fontFamily="@font/inter"
-        android:textSize="14dp"
-        android:textColor="@color/white"
-        android:textAlignment="center"
-        android:text="Добро пожаловать!\nЧтобы войти в аккаунт, введите\nemail и пароль"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/login_group"/>
 
     <LinearLayout
-        android:id="@+id/login_group"
+        android:id="@+id/register_group"
         android:layout_width="327dp"
-        android:layout_height="180dp"
-        android:layout_marginTop="15dp"
+        android:layout_height="302dp"
+        android:layout_marginTop="159dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login_info" >
+        app:layout_constraintTop_toTopOf="parent" >
 
         <EditText
-            android:id="@+id/email_edit_log"
+            android:id="@+id/profile_name_edit"
             android:layout_width="match_parent"
             android:layout_height="56dp"
+            android:layout_weight="1"
+            android:hint="Придумате имя профиля"
+            android:textColorHint="@color/white"
+            android:textColor="@color/white"
+            android:textSize="16dp"
+            android:paddingStart="22dp"
+            android:background="@drawable/profile_name_edittext_modif"/>
+
+        <EditText
+            android:id="@+id/email_edit_reg"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_weight="1"
+            android:layout_marginTop="24dp"
             android:paddingStart="22dp"
             android:hint="Введите почту"
             android:textColor="@color/white"
@@ -62,9 +61,10 @@
             android:background="@drawable/edit_text_modif"/>
 
         <EditText
-            android:id="@+id/password_edit_log"
+            android:id="@+id/password_edit_reg"
             android:layout_width="match_parent"
             android:layout_height="56dp"
+            android:layout_weight="1"
             android:layout_marginTop="24dp"
             android:paddingStart="22dp"
             android:hint="Введите пароль"
@@ -73,40 +73,26 @@
             android:inputType="textPassword"
             android:background="@drawable/edit_text_modif"/>
         
-        <TextView
-            android:id="@+id/text_forget_pass_link"
-            android:layout_width="97dp"
-            android:layout_height="14dp"
-            android:layout_marginTop="30dp"
-            android:layout_gravity="end"
-            android:fontFamily="@font/inter"
-            android:textSize="12dp"
-            android:textColor="@color/gold"
-            android:text="Забыл пароль"/>
+        <Button
+            android:id="@+id/btn_create_account"
+            android:layout_width="match_parent"
+            android:layout_height="62dp"
+            android:layout_weight="1"
+            android:layout_marginTop="24dp"
+            android:text="Создать аккаунт"
+            android:fontFamily="@font/inter_bold"
+            android:textColor="@color/black"
+            android:textSize="16dp"
+            android:textAllCaps="false"
+            android:background="@drawable/button_main"/>
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/btn_login"
-        android:layout_width="327dp"
-        android:layout_height="62dp"
-        android:layout_weight="1"
-        android:layout_marginTop="457dp"
-        android:text="Войти"
-        android:fontFamily="@font/inter_bold"
-        android:textColor="@color/black"
-        android:textSize="16dp"
-        android:textAllCaps="false"
-        android:background="@drawable/button_main"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
-
     <TextView
-        android:id="@+id/text_create_acc_link"
+        android:id="@+id/text_login_link"
         android:layout_width="247dp"
         android:layout_height="19dp"
-        android:text="У меня ещё нет аккаунта"
+        android:text="Уже есть аккаунт?"
         android:textColor="@color/gold"
         android:textAlignment="center"
         android:fontFamily="@font/inter"
