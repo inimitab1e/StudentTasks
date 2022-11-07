@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.addCallback
 import androidx.navigation.fragment.findNavController
 import com.example.student_tasks.R
 import com.example.student_tasks.databinding.FragmentLoginBinding
@@ -24,11 +25,19 @@ class RegisterFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         binding.apply {
             textLoginLink.setOnClickListener {
                 findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
             }
-
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val callback = requireActivity().onBackPressedDispatcher.addCallback(this) {
+            findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
+        }
+        callback.isEnabled
     }
 }

@@ -17,7 +17,6 @@ class LoginFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         binding = FragmentLoginBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -28,8 +27,6 @@ class LoginFragment : Fragment() {
             textCreateAccLink.setOnClickListener {
                 findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
             }
-
         }
     }
-
 }
