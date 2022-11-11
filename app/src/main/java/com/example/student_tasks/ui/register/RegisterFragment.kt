@@ -28,16 +28,8 @@ class RegisterFragment : Fragment() {
 
         binding.apply {
             textLoginLink.setOnClickListener {
-                findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
+                findNavController().navigateUp()
             }
         }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        val callback = requireActivity().onBackPressedDispatcher.addCallback(this) {
-            findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
-        }
-        callback.isEnabled
     }
 }
