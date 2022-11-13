@@ -1,0 +1,24 @@
+package com.example.student_tasks.viewmodel
+
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.student_tasks.data.model.RegisterRequest
+import com.example.student_tasks.repository.RegisterRepository
+import kotlinx.coroutines.launch
+
+class RegisterViewModel: ViewModel() {
+
+    private val repo = RegisterRepository()
+
+    fun registerUser(username: String, email: String, password: String) {
+        viewModelScope.launch {
+            val registerRequest = RegisterRequest(
+                userName = username,
+                email = email,
+                password = password
+            )
+            val response = repo.RegisterUser(registerRequest = registerRequest)
+            print(response?.code())
+        }
+    }
+}

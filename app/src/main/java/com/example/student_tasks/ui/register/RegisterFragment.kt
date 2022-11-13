@@ -6,14 +6,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.addCallback
+import androidx.activity.viewModels
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.student_tasks.R
 import com.example.student_tasks.databinding.FragmentLoginBinding
 import com.example.student_tasks.databinding.FragmentRegisterBinding
+import com.example.student_tasks.viewmodel.RegisterViewModel
 
 class RegisterFragment : Fragment() {
 
     private lateinit var binding: FragmentRegisterBinding
+    private val registerViewModel by viewModels<RegisterViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,6 +34,18 @@ class RegisterFragment : Fragment() {
             textLoginLink.setOnClickListener {
                 findNavController().navigateUp()
             }
+
+            btnCreateAccount.setOnClickListener {
+                doRegister()
+            }
         }
+    }
+
+    private fun doRegister() {
+        val username = binding.profileNameEdit.text.toString()
+        val email = binding.emailEditReg.text.toString()
+        val password = binding.passwordEditReg.text.toString()
+
+        registerViewModel.registerUser(username, email, password)
     }
 }
