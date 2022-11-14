@@ -1,34 +1,31 @@
 package com.example.student_tasks.data.room
 
-
-import android.content.Context
 import androidx.annotation.WorkerThread
-import androidx.lifecycle.LiveData
 import com.example.student_tasks.MainActivity
 
-class StudentRepository(context: MainActivity) {
+class UserRepository(context: MainActivity) {
 
     var db: UsersDAO = AppDatabase.getInstance(context)?.UsersDAO()!!
 
 
     //Fetch All the Users
-    fun getAllStudents(): List<Users> {
-        return db.getAllStudents()
+    fun getAllUsers(): List<Users> {
+        return db.getAllUsers()
     }
 
     // Insert new user
-    fun insertStudent(user: Users) {
-        db.insertStudent(user)
+    fun insertUsers(user: Users) {
+        db.insertUsers(user)
     }
 
     // update user
-    fun updateStudent(user: Users) {
-        db.updateStudent(user)
+    fun updateUsers(user: Users) {
+        db.updateUsers(user)
     }
 
     // Delete user
-    fun deleteStudent(user: Users) {
-        db.deleteStudent(user)
+    fun deleteUsers(user: Users) {
+        db.deleteUsers(user)
     }
 
     @WorkerThread

@@ -6,16 +6,16 @@ import androidx.room.*
 interface UsersDAO {
 
     @Insert
-    fun insertStudent(user: Users)
+    fun insertUsers(user: Users)
 
     @Query("Select * from users")
-    fun getAllStudents(): List<Users>
+    fun getAllUsers(): List<Users>
 
     @Update
-    fun updateStudent(user: Users)
+    fun updateUsers(user: Users)
 
     @Delete
-    fun deleteStudent(user: Users)
+    fun deleteUsers(user: Users)
 
     @Query("Select * from users where userName like  :desc")
     fun getSearchResults(desc : String) : List<Users>

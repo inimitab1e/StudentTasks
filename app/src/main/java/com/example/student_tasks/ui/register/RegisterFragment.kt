@@ -5,12 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.addCallback
-import androidx.activity.viewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.example.student_tasks.R
-import com.example.student_tasks.databinding.FragmentLoginBinding
 import com.example.student_tasks.databinding.FragmentRegisterBinding
 import com.example.student_tasks.viewmodel.RegisterViewModel
 
