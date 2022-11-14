@@ -17,8 +17,9 @@ class LoginViewModel: ViewModel() {
                 password = password
             )
             val response = repo.LoginUser(loginRequest = loginRequest)
-            print(response?.code())
-            print("fsefweafewaefwaefrgaergawefweFWEFEFESGARGRGFGDA")
+            if (response?.code() == 200) {
+                val c = 123
+            }
         }
     }
 }
