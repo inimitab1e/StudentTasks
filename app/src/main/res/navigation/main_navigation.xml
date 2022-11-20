@@ -31,7 +31,7 @@
     </fragment>
     <fragment
         android:id="@+id/studentsListFragment"
-        android:name="com.example.student_tasks.ui.StudentsListFragment"
+        android:name="com.example.student_tasks.ui.content.StudentsListFragment"
         android:label="StudentsListFragment"
         tools:layout="@layout/fragment_students_list"/>
 </navigation>

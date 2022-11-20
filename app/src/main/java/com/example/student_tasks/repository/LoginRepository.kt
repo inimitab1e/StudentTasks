@@ -7,8 +7,6 @@ import retrofit2.Response
 
 class LoginRepository {
     suspend fun LoginUser(loginRequest: LoginRequest): Response<AuthResponse>? {
-        var i = 1
-        i += 1
         return AuthService.getApi()?.login(loginRequest = loginRequest)
     }
 }

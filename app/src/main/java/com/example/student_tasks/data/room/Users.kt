@@ -9,6 +9,5 @@ import androidx.room.PrimaryKey
 data class Users(
     @PrimaryKey(autoGenerate = true) var ID: Int? = null,
     var userName: String?,
-    var userEmail: String?,
-    var userAvatar: Bitmap?
+    var userEmail: String?
 )

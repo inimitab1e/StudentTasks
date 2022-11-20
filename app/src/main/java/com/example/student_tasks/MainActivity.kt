@@ -1,11 +1,20 @@
 package com.example.student_tasks
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 
 class MainActivity : AppCompatActivity() {
+
+    companion object {
+        private var instance: MainActivity? = null
+
+        fun applicationContext() : Context {
+            return instance!!.applicationContext
+        }
+    }
 
     private lateinit var navConrtoller: NavController
 
