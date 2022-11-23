@@ -8,14 +8,6 @@ import androidx.navigation.fragment.NavHostFragment
 
 class MainActivity : AppCompatActivity() {
 
-    companion object {
-        private var instance: MainActivity? = null
-
-        fun applicationContext() : Context {
-            return instance!!.applicationContext
-        }
-    }
-
     private lateinit var navConrtoller: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -34,6 +34,7 @@ class LoginFragment : Fragment() {
 
             btnLogin.setOnClickListener {
                 doLogin()
+                findNavController().navigate(R.id.action_loginFragment_to_studentsListFragment)
             }
         }
     }

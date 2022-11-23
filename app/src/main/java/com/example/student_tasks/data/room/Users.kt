@@ -1,7 +1,6 @@
 package com.example.student_tasks.data.room
 
 
-import android.graphics.Bitmap
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 

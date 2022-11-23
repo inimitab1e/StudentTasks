@@ -14,16 +14,16 @@ class LoginViewModel: ViewModel() {
 
     private val repo = LoginRepository()
 
-    val sharedPrefsFile: String = "Secret"
-    val mainKeyAlias = MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC)
-
-    val sharedPreferences: SharedPreferences = EncryptedSharedPreferences.create(
-        sharedPrefsFile,
-        mainKeyAlias,
-        MainActivity.applicationContext(),
-        EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
-        EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
-    )
+//    private val sharedPrefsFile: String = "Secret"
+//    private val mainKeyAlias = MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC)
+//
+//    private val sharedPreferences: SharedPreferences = EncryptedSharedPreferences.create(
+//        sharedPrefsFile,
+//        mainKeyAlias,
+//        MainActivity.applicationContext()!!,
+//        EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+//        EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+//    )
 
 
     fun loginUser(email: String, password: String) {
@@ -33,12 +33,14 @@ class LoginViewModel: ViewModel() {
                 password = password
             )
             val response = repo.LoginUser(loginRequest = loginRequest)
-
-            with (sharedPreferences.edit()) {
-                putString(response?.body()?.accessToken, "Access token")
-                apply()
-            }
-
+//            saveSecret(response?.body()?.accessToken)
         }
     }
+
+//    private fun saveSecret(token: String?) {
+//        with (sharedPreferences.edit()) {
+//            putString(token, "Access token")
+//            apply()
+//        }
+//    }
 }

@@ -1,9 +1,11 @@
 package com.example.student_tasks.data.room
 
+import android.content.Context
 import androidx.annotation.WorkerThread
 import com.example.student_tasks.MainActivity
+import com.example.student_tasks.viewmodel.StudentListViewModel
 
-class UserRepository(context: MainActivity) {
+class UserRepository(context: Context) {
 
     var db: UsersDAO = AppDatabase.getInstance(context)?.UsersDAO()!!
 
