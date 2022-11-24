@@ -23,16 +23,17 @@ class StudentsListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentStudentsListBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
 
         binding.rwStudentsList.apply {
             layoutManager = LinearLayoutManager(activity)
             adapter = StudentsListAdapter()
         }
+
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         studentListViewModel.updateList()
     }

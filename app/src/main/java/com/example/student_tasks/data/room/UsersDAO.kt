@@ -17,6 +17,9 @@ interface UsersDAO {
     @Delete
     fun deleteUsers(user: Users)
 
+    @Query("DELETE FROM users")
+    fun deleteAll()
+
     @Query("Select * from users where userName like  :desc")
     fun getSearchResults(desc : String) : List<Users>
 }

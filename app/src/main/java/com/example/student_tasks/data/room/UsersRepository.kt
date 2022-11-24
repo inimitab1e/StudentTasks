@@ -30,6 +30,10 @@ class UserRepository(context: Context) {
         db.deleteUsers(user)
     }
 
+    fun deleteAll() {
+        db.deleteAll()
+    }
+
     @WorkerThread
     fun search(desc : String) : List<Users> {
         return db.getSearchResults(desc)
