@@ -26,7 +26,6 @@ class StudentListViewModel(app: Application): AndroidViewModel(app) {
             val response = repo.updateUsersList()
             val listOfUsers = response?.body()?.usersResponseList
             addUsers(listOfUsers, listOfUsers?.size)
-            var usersList = mutableListOf<Users>()
         }
     }
 

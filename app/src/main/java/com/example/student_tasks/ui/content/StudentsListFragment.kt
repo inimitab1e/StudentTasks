@@ -35,6 +35,6 @@ class StudentsListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        studentListViewModel.updateList()
+        //studentListViewModel.updateList()
     }
 }
