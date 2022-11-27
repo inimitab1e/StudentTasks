@@ -49,8 +49,8 @@ class RegisterFragment : Fragment(), LoginResultCallBacks {
     }
 
     override fun onSuccess(message: String) =
-        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+        Toast.makeText(activity, message, Toast.LENGTH_SHORT).show()
 
     override fun onError(message: String) =
-        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+        Toast.makeText(activity, message, Toast.LENGTH_SHORT).show()
 }

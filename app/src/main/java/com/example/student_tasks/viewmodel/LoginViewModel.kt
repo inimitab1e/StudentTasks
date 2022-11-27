@@ -24,7 +24,6 @@ class LoginViewModel(app: Application): AndroidViewModel(app) {
             )
             val response = repo.LoginUser(loginRequest = loginRequest)
             prefHelper.saveAccessToken(response?.body()?.accessToken)
-            val test = prefHelper.getAccessToken()
         }
     }
 }

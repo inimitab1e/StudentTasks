@@ -22,8 +22,9 @@ class StudentsListAdapter() : RecyclerView.Adapter<StudentsListAdapter.UsersHold
         notifyDataSetChanged()
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UsersHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_students_list, parent, false)
+    override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): UsersHolder {
+        val view = LayoutInflater.from(viewGroup.context)
+            .inflate(R.layout.item_students_list, viewGroup, false)
         return UsersHolder(view)
     }
 

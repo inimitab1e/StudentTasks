@@ -29,24 +29,4 @@ class PrefHelper(context: Context) {
         editor.clear()
             .apply()
     }
-
-//    private val sharedPrefsFile: String = "Secret"
-//    private val mainKeyAlias = MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC)
-//
-//    private val sharedPreferences: SharedPreferences = EncryptedSharedPreferences.create(
-//        sharedPrefsFile,
-//        mainKeyAlias,
-//        context,
-//        EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
-//        EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
-//    )
-//
-//    fun saveAccessToken(token: String?) {
-//        with (sharedPreferences.edit()) {
-//            putString(token, "Access token")
-//            apply()
-//        }
-//    }
-//
-//    fun getSecretInfo() = sharedPreferences.getString("Access token", null)
 }

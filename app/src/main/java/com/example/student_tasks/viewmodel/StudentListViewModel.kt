@@ -23,6 +23,7 @@ class StudentListViewModel(app: Application): AndroidViewModel(app) {
 
     fun updateList() {
         viewModelScope.launch {
+            roomRepo.deleteAll()
             val response = repo.updateUsersList()
             val listOfUsers = response?.body()?.usersResponseList
             addUsers(listOfUsers, listOfUsers?.size)
@@ -46,9 +47,9 @@ class StudentListViewModel(app: Application): AndroidViewModel(app) {
                     )
                     roomRepo.insertUsers(user)
                 }
-                fetchUsers()
                 i += 2
             }
+            fetchUsers()
         }
     }
 
