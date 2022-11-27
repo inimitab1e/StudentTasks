@@ -19,7 +19,6 @@ class StudentsListAdapter() : RecyclerView.Adapter<StudentsListAdapter.UsersHold
 
     fun setUsers(user: List<Users>) {
         this.usersList = user.toMutableList()
-        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): UsersHolder {

@@ -18,6 +18,9 @@ class StudentsListFragment : Fragment() {
 
     private lateinit var binding: FragmentStudentsListBinding
     private val studentListViewModel by viewModels<StudentListViewModel>()
+    private val usersAdapter: StudentsListAdapter by lazy {
+        StudentsListAdapter()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,6 +38,14 @@ class StudentsListFragment : Fragment() {
             layoutManager = LinearLayoutManager(activity)
             adapter = StudentsListAdapter()
         }
-
+        studentListViewModel.userList.observe(viewLifecycleOwner) {
+            usersAdapter.setUsers(studentListViewModel.userList.value!!)
+            usersAdapter.notifyDataSetChanged()
+        }
     }
+
+//    private fun fetchUsers() {
+//        val allUsers = roomRepo.getAllUsers()
+//        usersAdapter.setUsers(allUsers)
+//    }
 }

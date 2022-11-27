@@ -3,6 +3,7 @@ package com.example.student_tasks.viewmodel
 import android.app.Application
 import android.content.Context
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.student_tasks.adapters.StudentsListAdapter
 import com.example.student_tasks.data.room.UserRepository
@@ -17,9 +18,9 @@ class StudentListViewModel(app: Application): AndroidViewModel(app) {
     private val roomRepo: UserRepository by lazy {
         UserRepository(getApplication())
     }
-    private val usersAdapter: StudentsListAdapter by lazy {
-        StudentsListAdapter()
-    }
+
+    private var _userList = MutableLiveData<List<Users>>()
+    val userList get() = _userList
 
     fun updateList() {
         viewModelScope.launch {
@@ -27,6 +28,7 @@ class StudentListViewModel(app: Application): AndroidViewModel(app) {
             val response = repo.updateUsersList()
             val listOfUsers = response?.body()?.usersResponseList
             addUsers(listOfUsers, listOfUsers?.size)
+            _userList.value = roomRepo.getAllUsers()
         }
     }
 
@@ -49,12 +51,6 @@ class StudentListViewModel(app: Application): AndroidViewModel(app) {
                 }
                 i += 2
             }
-            fetchUsers()
         }
-    }
-
-    private fun fetchUsers() {
-        val allUsers = roomRepo.getAllUsers()
-        usersAdapter.setUsers(allUsers)
     }
 }
