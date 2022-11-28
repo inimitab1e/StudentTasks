@@ -1,21 +1,22 @@
 package com.example.student_tasks.viewmodel
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.student_tasks.data.room.UserRepository
 import com.example.student_tasks.data.room.Users
 import com.example.student_tasks.repository.StudentListRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class StudentListViewModel(app: Application): AndroidViewModel(app) {
+@HiltViewModel
+class StudentListViewModel @Inject constructor(
+    private val roomRepo: UserRepository,
+    private val getLocalUserList: provideGetLocalUserList
+): ViewModel() {
 
-    private val repo = StudentListRepository()
     private var users: Users? = null
-    private val roomRepo: UserRepository by lazy {
-        UserRepository(getApplication())
-    }
 
     private var _userList = MutableLiveData<List<Users>>()
     val userList get() = _userList
