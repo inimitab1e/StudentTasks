@@ -11,6 +11,8 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="email_pass_et">#696C75</color>
+    <color name="user_item_bg">#1F2430</color>
+
     <color name="gold">#F4D144</color>
     <color name="hint_gray">#696C75</color>
     <color name="light_blue_600">#FF039BE5</color>

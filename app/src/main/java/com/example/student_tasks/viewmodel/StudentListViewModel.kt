@@ -1,11 +1,9 @@
 package com.example.student_tasks.viewmodel
 
 import android.app.Application
-import android.content.Context
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.student_tasks.adapters.StudentsListAdapter
 import com.example.student_tasks.data.room.UserRepository
 import com.example.student_tasks.data.room.Users
 import com.example.student_tasks.repository.StudentListRepository

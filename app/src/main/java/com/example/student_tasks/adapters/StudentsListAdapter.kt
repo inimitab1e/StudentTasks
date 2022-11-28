@@ -15,7 +15,7 @@ class StudentsListAdapter() : RecyclerView.Adapter<StudentsListAdapter.UsersHold
         val email = view.findViewById<TextView>(R.id.item_email)
     }
 
-    var usersList = mutableListOf<Users>()
+    private var usersList = mutableListOf<Users>()
 
     fun setUsers(user: List<Users>) {
         this.usersList = user.toMutableList()
