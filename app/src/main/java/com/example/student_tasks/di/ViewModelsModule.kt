@@ -8,34 +8,31 @@ import com.example.student_tasks.repository.StudentListRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ViewModelComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
 @Module
-@InstallIn(SingletonComponent::class)
-class DataModule {
+@InstallIn(ViewModelComponent::class)
+class ViewModelsModule {
 
     @Provides
-    @Singleton
     fun provideStudentListRepository() : StudentListRepository {
         return StudentListRepository()
     }
 
     @Provides
-    @Singleton
     fun provideRoomUsersRepository(@ApplicationContext context: Context) : UserRepository {
         return UserRepository(context = context)
     }
 
     @Provides
-    @Singleton
     fun provideRegisterRepository() : RegisterRepository {
         return RegisterRepository()
     }
 
     @Provides
-    @Singleton
     fun provideLoginRepository() : LoginRepository {
         return LoginRepository()
     }

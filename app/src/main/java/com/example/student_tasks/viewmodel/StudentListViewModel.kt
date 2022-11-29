@@ -13,7 +13,7 @@ import javax.inject.Inject
 @HiltViewModel
 class StudentListViewModel @Inject constructor(
     private val roomRepo: UserRepository,
-    private val getLocalUserList: provideGetLocalUserList
+    private val repo: StudentListRepository
 ): ViewModel() {
 
     private var users: Users? = null

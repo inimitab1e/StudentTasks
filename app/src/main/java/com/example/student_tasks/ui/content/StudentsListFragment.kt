@@ -10,7 +10,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.student_tasks.adapters.StudentsListAdapter
 import com.example.student_tasks.databinding.FragmentStudentsListBinding
 import com.example.student_tasks.viewmodel.StudentListViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class StudentsListFragment : Fragment() {
 
     private lateinit var binding: FragmentStudentsListBinding
