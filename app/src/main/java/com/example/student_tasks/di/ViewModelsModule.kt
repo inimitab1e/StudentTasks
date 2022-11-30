@@ -5,6 +5,7 @@ import com.example.student_tasks.data.room.UserRepository
 import com.example.student_tasks.repository.LoginRepository
 import com.example.student_tasks.repository.RegisterRepository
 import com.example.student_tasks.repository.StudentListRepository
+import com.example.student_tasks.security.PrefHelper
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -35,5 +36,9 @@ class ViewModelsModule {
     @Provides
     fun provideLoginRepository() : LoginRepository {
         return LoginRepository()
+    }
+
+    fun providePrefHelper(@ApplicationContext context: Context) : PrefHelper {
+        return PrefHelper(context = context)
     }
 }

@@ -1,20 +1,19 @@
 package com.example.student_tasks.viewmodel
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.student_tasks.data.model.LoginRequest
 import com.example.student_tasks.repository.LoginRepository
 import com.example.student_tasks.security.PrefHelper
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class LoginViewModel(app: Application): AndroidViewModel(app) {
-
-    private val repo = LoginRepository()
-
-    private val prefHelper: PrefHelper by lazy {
-        PrefHelper(getApplication())
-    }
+@HiltViewModel
+class LoginViewModel @Inject constructor(
+    private val loginRepo: LoginRepository,
+    private val prefHelper: PrefHelper
+): ViewModel() {
 
     fun loginUser(email: String, password: String) {
         viewModelScope.launch {
@@ -22,7 +21,7 @@ class LoginViewModel(app: Application): AndroidViewModel(app) {
                 email = email,
                 password = password
             )
-            val response = repo.LoginUser(loginRequest = loginRequest)
+            val response = loginRepo.LoginUser(loginRequest = loginRequest)
             prefHelper.saveAccessToken(response?.body()?.accessToken)
         }
     }

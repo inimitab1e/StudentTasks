@@ -5,11 +5,15 @@ import androidx.lifecycle.viewModelScope
 import com.example.student_tasks.data.model.RegisterRequest
 import com.example.student_tasks.interfaces.LoginResultCallBacks
 import com.example.student_tasks.repository.RegisterRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class RegisterViewModel: ViewModel() {
+@HiltViewModel
+class RegisterViewModel @Inject constructor(
+    private val registerRepo: RegisterRepository,
 
-    private val repo = RegisterRepository()
+): ViewModel() {
     var authListener: LoginResultCallBacks ?= null
 
     fun registerUser(username: String, email: String, password: String) {
@@ -19,7 +23,7 @@ class RegisterViewModel: ViewModel() {
                 email = email,
                 password = password
             )
-            val response = repo.RegisterUser(registerRequest = registerRequest)
+            val response = registerRepo.RegisterUser(registerRequest = registerRequest)
 
             if (response?.raw()?.code == 200) {
                 authListener?.onSuccess("You have successfully registered!")
