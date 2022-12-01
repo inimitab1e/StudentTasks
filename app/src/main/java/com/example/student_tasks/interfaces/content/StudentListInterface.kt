@@ -1,4 +1,4 @@
-package com.example.student_tasks.interfaces
+package com.example.student_tasks.interfaces.content
 
 import com.example.student_tasks.data.model.UsersListResponse
 import com.example.student_tasks.data.room.Users

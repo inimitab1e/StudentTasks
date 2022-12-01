@@ -3,11 +3,10 @@ package com.example.student_tasks.repository
 import com.example.student_tasks.data.model.UsersListResponse
 import com.example.student_tasks.data.room.UserRepository
 import com.example.student_tasks.data.room.Users
-import com.example.student_tasks.interfaces.StudentListInterface
+import com.example.student_tasks.interfaces.content.StudentListInterface
 import com.example.student_tasks.network.AuthService
 import retrofit2.Response
 import javax.inject.Inject
-
 
 class StudentListRepository @Inject constructor(
     private val roomRepo: UserRepository,
