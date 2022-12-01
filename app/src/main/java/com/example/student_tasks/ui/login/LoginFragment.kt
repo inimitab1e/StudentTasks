@@ -11,7 +11,9 @@ import com.example.student_tasks.R
 import com.example.student_tasks.databinding.FragmentLoginBinding
 import com.example.student_tasks.viewmodel.LoginViewModel
 import com.example.student_tasks.viewmodel.RegisterViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class LoginFragment : Fragment() {
 
     private lateinit var binding: FragmentLoginBinding

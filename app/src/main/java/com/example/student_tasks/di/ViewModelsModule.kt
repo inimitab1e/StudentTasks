@@ -19,8 +19,8 @@ import javax.inject.Singleton
 class ViewModelsModule {
 
     @Provides
-    fun provideStudentListRepository() : StudentListRepository {
-        return StudentListRepository()
+    fun provideStudentListRepository(@ApplicationContext context: Context) : StudentListRepository {
+        return StudentListRepository(roomRepo = UserRepository(context))
     }
 
     @Provides
@@ -38,6 +38,7 @@ class ViewModelsModule {
         return LoginRepository()
     }
 
+    @Provides
     fun providePrefHelper(@ApplicationContext context: Context) : PrefHelper {
         return PrefHelper(context = context)
     }

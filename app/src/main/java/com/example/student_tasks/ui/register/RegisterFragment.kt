@@ -12,7 +12,9 @@ import androidx.navigation.fragment.findNavController
 import com.example.student_tasks.databinding.FragmentRegisterBinding
 import com.example.student_tasks.interfaces.LoginResultCallBacks
 import com.example.student_tasks.viewmodel.RegisterViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class RegisterFragment : Fragment(), LoginResultCallBacks {
 
     private lateinit var binding: FragmentRegisterBinding
