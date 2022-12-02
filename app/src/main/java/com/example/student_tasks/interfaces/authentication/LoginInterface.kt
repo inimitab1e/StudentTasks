@@ -6,4 +6,5 @@ import retrofit2.Response
 
 interface LoginInterface {
     suspend fun LoginUser(loginRequest: LoginRequest): Response<AuthResponse>?
+    suspend fun checkTokenValidity(token: String): Response<>
 }

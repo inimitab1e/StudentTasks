@@ -14,10 +14,16 @@ import javax.inject.Inject
 @HiltViewModel
 class LoginViewModel @Inject constructor(
     private val loginRepo: LoginRepository,
-    private val prefHelper: PrefHelper,
+    private val prefHelper: PrefHelper
 ): ViewModel() {
-    private var _state = MutableLiveData<String>()
-    val state get() = _state
+    private var _responseState = MutableLiveData<String>()
+    val responseState get() = _responseState
+
+    private var _userExists = MutableLiveData<Boolean>()
+    val userExists get() = _userExists
+
+    private var _isTokenValid = MutableLiveData<Boolean>()
+    val isTokenValid get() = _isTokenValid
 
     fun loginUser(email: String, password: String) {
         viewModelScope.launch {
@@ -29,9 +35,22 @@ class LoginViewModel @Inject constructor(
             if (response?.errorBody() == null) {
                 prefHelper.clear()
                 prefHelper.saveUserInfo(response?.body()?.accessToken, email)
-                _state.value = StringConstants.onSuccessLoggedIn
+                _responseState.value = StringConstants.onSuccessLoggedIn
             } else {
-                _state.value = response.message()
+                _responseState.value = response.message()
+            }
+        }
+    }
+
+    fun checkIfUserValid() {
+        viewModelScope.launch {
+            if(prefHelper.getUserEmail() == null) {
+                _userExists.value = false
+            } else if (check validity == false) {
+                _isTokenValid.value = false
+            } else {
+            _userExists.value = true
+            _isTokenValid.value = true
             }
         }
     }

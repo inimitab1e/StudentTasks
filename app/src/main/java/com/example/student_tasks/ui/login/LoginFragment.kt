@@ -38,13 +38,13 @@ class LoginFragment : Fragment() {
             btnLogin.setOnClickListener {
                 doLogin()
             }
+        }
 
-            loginViewModel.state.observe(viewLifecycleOwner) {
-                if (it == StringConstants.onSuccessLoggedIn) {
-                    findNavController().navigate(R.id.action_loginFragment_to_studentsListFragment)
-                } else {
-                    onErrorLoggedIn(it)
-                }
+        loginViewModel.responseState.observe(viewLifecycleOwner) {
+            if (it == StringConstants.onSuccessLoggedIn) {
+                findNavController().navigate(R.id.action_loginFragment_to_studentsListFragment)
+            } else {
+                onErrorLoggedIn(it)
             }
         }
     }
