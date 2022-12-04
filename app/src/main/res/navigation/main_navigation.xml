@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.example.student_tasks.ui.login.LoginFragment"
+        android:name="com.example.student_tasks.ui.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
-        android:name="com.example.student_tasks.ui.register.RegisterFragment"
+        android:name="com.example.student_tasks.ui.RegisterFragment"
         android:label="RegisterFragment"
         tools:layout="@layout/fragment_register">
         <action
@@ -31,7 +31,7 @@
     </fragment>
     <fragment
         android:id="@+id/studentsListFragment"
-        android:name="com.example.student_tasks.ui.content.StudentsListFragment"
+        android:name="com.example.student_tasks.ui.StudentsListFragment"
         android:label="StudentsListFragment"
         tools:layout="@layout/fragment_students_list"/>
 </navigation>

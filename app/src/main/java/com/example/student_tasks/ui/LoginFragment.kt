@@ -1,4 +1,4 @@
-package com.example.student_tasks.ui.login
+package com.example.student_tasks.ui
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -17,7 +17,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class LoginFragment : Fragment() {
 
-    private lateinit var binding: FragmentLoginBinding
+    private var binding: FragmentLoginBinding? = null
     private val loginViewModel by viewModels<LoginViewModel>()
 
     override fun onCreateView(
@@ -25,12 +25,12 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentLoginBinding.inflate(inflater, container, false)
-        return binding.root
+        return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.apply {
+        binding?.apply {
             textCreateAccLink.setOnClickListener {
                 findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
             }
@@ -50,13 +50,18 @@ class LoginFragment : Fragment() {
     }
 
     private fun doLogin() {
-        val email = binding.emailEditLog.text.toString()
-        val password = binding.passwordEditLog.text.toString()
+        val email = binding?.emailEditLog?.text.toString()
+        val password = binding?.passwordEditLog?.text.toString()
 
         loginViewModel.loginUser(email, password)
     }
 
     private fun onErrorLoggedIn(message: String) {
         Toast.makeText(activity, message, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
     }
 }

@@ -1,4 +1,4 @@
-package com.example.student_tasks.ui.content
+package com.example.student_tasks.ui
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -15,7 +15,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class StudentsListFragment : Fragment() {
 
-    private lateinit var binding: FragmentStudentsListBinding
+    private var binding: FragmentStudentsListBinding? = null
     private val studentListViewModel by viewModels<StudentListViewModel>()
     private val usersAdapter: StudentsListAdapter by lazy {
         StudentsListAdapter()
@@ -27,13 +27,13 @@ class StudentsListFragment : Fragment() {
     ): View? {
         binding = FragmentStudentsListBinding.inflate(inflater, container, false)
         studentListViewModel.updateList()
-        return binding.root
+        return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.rwStudentsList.apply {
+        binding?.rwStudentsList?.apply {
             layoutManager = LinearLayoutManager(activity)
             adapter = usersAdapter
         }
@@ -43,5 +43,10 @@ class StudentsListFragment : Fragment() {
                 notifyDataSetChanged()
             }
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
     }
 }
