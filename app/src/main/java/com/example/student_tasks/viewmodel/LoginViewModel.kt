@@ -35,7 +35,11 @@ class LoginViewModel @Inject constructor(
             val response = loginRepo.LoginUser(loginRequest = loginRequest)
             if (response?.errorBody() == null) {
                 prefHelper.clear()
-                prefHelper.saveUserInfo(response?.body()?.accessToken, email)
+                prefHelper.saveUserInfo(
+                    response?.body()?.accessToken,
+                    response?.body()?.refreshToken,
+                    email
+                )
                 _responseState.value = StringConstants.onSuccessLoggedIn
             } else {
                 _responseState.value = response.message()

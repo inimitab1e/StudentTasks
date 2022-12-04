@@ -16,14 +16,19 @@ class PrefHelper(context: Context) {
         editor = sharedPref.edit()
     }
 
-    fun saveUserInfo(token: String?, email: String) {
-        editor.putString("AccessToken", token)
+    fun saveUserInfo(accessToken: String?, refreshToken: String?, email: String) {
+        editor.putString("AccessToken", accessToken)
+            .putString("RefreshToken", refreshToken)
             .putString("Email", email)
             .apply()
     }
 
     fun getAccessToken(): String? {
         return sharedPref.getString("AccessToken", null)
+    }
+
+    fun getRefreshToken(): String? {
+        return sharedPref.getString("RefreshToken", null)
     }
 
     fun getUserEmail(): String? {
