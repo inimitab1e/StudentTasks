@@ -17,6 +17,9 @@ interface AuthService {
     @POST("/login")
     suspend fun login(@Body loginRequest: LoginRequest): Response<AuthResponse>
 
+    @GET("/validity")
+    suspend fun validity() : Response<String>
+
     @GET("/users")
     suspend fun updateUsersList(): Response<UsersListResponse>
 

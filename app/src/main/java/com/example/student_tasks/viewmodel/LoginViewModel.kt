@@ -32,7 +32,7 @@ class LoginViewModel @Inject constructor(
                 email = email,
                 password = password
             )
-            val response = loginRepo.LoginUser(loginRequest = loginRequest)
+            val response = loginRepo.loginUser(loginRequest = loginRequest)
             if (response?.errorBody() == null) {
                 prefHelper.clear()
                 prefHelper.saveUserInfo(
@@ -47,16 +47,16 @@ class LoginViewModel @Inject constructor(
         }
     }
 
-//    fun checkIfUserValid() {
-//        viewModelScope.launch {
-//            if(prefHelper.getUserEmail() == null) {
-//                _userExists.value = false
-//            } else if (check validity == false) {
-//                _isTokenValid.value = false
-//            } else {
-//            _userExists.value = true
-//            _isTokenValid.value = true
-//            }
-//        }
-//    }
+    fun checkIfUserValid() {
+        viewModelScope.launch {
+            if(prefHelper.getUserEmail() == null) {
+                _userExists.value = false
+            } else if (check validity == false) {
+                _isTokenValid.value = false
+            } else {
+            _userExists.value = true
+            _isTokenValid.value = true
+            }
+        }
+    }
 }

@@ -7,7 +7,9 @@ import com.example.student_tasks.network.AuthService
 import retrofit2.Response
 
 class LoginRepository : LoginInterface {
-    override suspend fun LoginUser(loginRequest: LoginRequest): Response<AuthResponse>? {
+    override suspend fun loginUser(loginRequest: LoginRequest): Response<AuthResponse>? {
         return AuthService.getApi()?.login(loginRequest = loginRequest)
     }
+
+    override suspend fun
 }
