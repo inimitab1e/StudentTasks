@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.student_tasks.data.model.RegisterRequest
+import com.example.student_tasks.interfaces.authentication.RegisterInterface
 import com.example.student_tasks.repository.RegisterRepository
 import com.example.student_tasks.security.PrefHelper
 import com.example.student_tasks.utils.StringConstants
@@ -13,7 +14,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class RegisterViewModel @Inject constructor(
-    private val registerRepo: RegisterRepository,
+    private val registerRepo: RegisterInterface,
     private val prefHelper: PrefHelper
 ): ViewModel() {
     private var _state = MutableLiveData<String>()

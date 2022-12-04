@@ -2,6 +2,9 @@ package com.example.student_tasks.di
 
 import android.content.Context
 import com.example.student_tasks.data.room.UserRepository
+import com.example.student_tasks.interfaces.authentication.LoginInterface
+import com.example.student_tasks.interfaces.authentication.RegisterInterface
+import com.example.student_tasks.interfaces.content.StudentListInterface
 import com.example.student_tasks.repository.LoginRepository
 import com.example.student_tasks.repository.RegisterRepository
 import com.example.student_tasks.repository.StudentListRepository
@@ -19,7 +22,7 @@ import javax.inject.Singleton
 class ViewModelsModule {
 
     @Provides
-    fun provideStudentListRepository(@ApplicationContext context: Context) : StudentListRepository {
+    fun provideStudentListRepository(@ApplicationContext context: Context) : StudentListInterface {
         return StudentListRepository(roomRepo = UserRepository(context))
     }
 
@@ -29,12 +32,12 @@ class ViewModelsModule {
     }
 
     @Provides
-    fun provideRegisterRepository() : RegisterRepository {
+    fun provideRegisterRepository() : RegisterInterface {
         return RegisterRepository()
     }
 
     @Provides
-    fun provideLoginRepository() : LoginRepository {
+    fun provideLoginRepository() : LoginInterface {
         return LoginRepository()
     }
 

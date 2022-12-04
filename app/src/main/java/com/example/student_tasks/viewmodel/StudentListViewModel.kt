@@ -4,14 +4,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.student_tasks.data.room.Users
-import com.example.student_tasks.repository.StudentListRepository
+import com.example.student_tasks.interfaces.content.StudentListInterface
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class StudentListViewModel @Inject constructor(
-    private val repo: StudentListRepository
+    private val repo: StudentListInterface
 ): ViewModel() {
     private var _userList = MutableLiveData<List<Users>>()
     val userList get() = _userList

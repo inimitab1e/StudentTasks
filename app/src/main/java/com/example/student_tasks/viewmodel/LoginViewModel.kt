@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.student_tasks.data.model.LoginRequest
+import com.example.student_tasks.interfaces.authentication.LoginInterface
 import com.example.student_tasks.repository.LoginRepository
 import com.example.student_tasks.security.PrefHelper
 import com.example.student_tasks.utils.StringConstants
@@ -13,7 +14,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
-    private val loginRepo: LoginRepository,
+    private val loginRepo: LoginInterface,
     private val prefHelper: PrefHelper
 ): ViewModel() {
     private var _responseState = MutableLiveData<String>()
@@ -42,16 +43,16 @@ class LoginViewModel @Inject constructor(
         }
     }
 
-    fun checkIfUserValid() {
-        viewModelScope.launch {
-            if(prefHelper.getUserEmail() == null) {
-                _userExists.value = false
-            } else if (check validity == false) {
-                _isTokenValid.value = false
-            } else {
-            _userExists.value = true
-            _isTokenValid.value = true
-            }
-        }
-    }
+//    fun checkIfUserValid() {
+//        viewModelScope.launch {
+//            if(prefHelper.getUserEmail() == null) {
+//                _userExists.value = false
+//            } else if (check validity == false) {
+//                _isTokenValid.value = false
+//            } else {
+//            _userExists.value = true
+//            _isTokenValid.value = true
+//            }
+//        }
+//    }
 }
