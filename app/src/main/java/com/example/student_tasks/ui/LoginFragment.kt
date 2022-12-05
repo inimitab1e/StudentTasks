@@ -25,7 +25,6 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         autoLoginCheck()
-
         binding = FragmentLoginBinding.inflate(inflater, container, false)
         return binding?.root
     }

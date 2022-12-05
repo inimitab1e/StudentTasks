@@ -16,13 +16,16 @@ interface AuthService {
     suspend fun login(@Body loginRequest: LoginRequest): Response<AuthResponse>
 
     @GET("/validity")
-    suspend fun checkAccessTokenValidity(@Header("Bearer") token: String) : Response<String>
+    suspend fun checkAccessTokenValidity(@Header("Authorization") token: String) : Response<ValidityResponse>
 
     @POST("/refresh")
-    suspend fun refreshTokens(@Body refreshRequest: RefreshRequest): Response<AuthResponse>
+    suspend fun refreshTokens(
+        @Header("Authorization") token: String,
+        @Body refreshRequest: RefreshRequest
+    ): Response<AuthResponse>
 
     @GET("/users")
-    suspend fun updateUsersList(): Response<UsersListResponse>
+    suspend fun updateUsersList(@Header("Authorization") token: String): Response<UsersListResponse>
 
     companion object {
         fun getApi(): AuthService? {

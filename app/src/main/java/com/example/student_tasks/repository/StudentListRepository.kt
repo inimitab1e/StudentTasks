@@ -12,8 +12,8 @@ class StudentListRepository @Inject constructor(
     private val roomRepo: UserRepository,
     private val users: Users? = null
 ) : StudentListInterface {
-    override suspend fun getRemoteUsersList(): Response<UsersListResponse>? {
-        return AuthService.getApi()?.updateUsersList()
+    override suspend fun getRemoteUsersList(token: String): Response<UsersListResponse>? {
+        return AuthService.getApi()?.updateUsersList(token = token)
     }
 
     override fun getLocalList(): List<Users> {

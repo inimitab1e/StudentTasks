@@ -67,7 +67,10 @@ class LoginViewModel @Inject constructor(
         val refreshRequest = RefreshRequest(
             email = email
         )
-        val response = loginRepo.refreshTokens(refreshRequest = refreshRequest)
+        val response = loginRepo.refreshTokens(
+            token = prefHelper.getRefreshToken().toString(),
+            refreshRequest = refreshRequest
+        )
         if (response?.errorBody() == null) {
             prefHelper.clear()
             prefHelper.saveUserInfo(
@@ -82,7 +85,7 @@ class LoginViewModel @Inject constructor(
     }
 
     private suspend fun isAccessTokenValid(): Boolean {
-        val response = loginRepo.checkTokenValidity(prefHelper.getAccessToken().toString())
+        val response = loginRepo.checkTokenValidity("Bearer " + prefHelper.getAccessToken().toString())
         return response?.errorBody() == null
     }
 }
