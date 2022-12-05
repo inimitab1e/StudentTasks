@@ -4,8 +4,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.student_tasks.data.model.LoginRequest
+import com.example.student_tasks.data.model.RefreshRequest
 import com.example.student_tasks.interfaces.authentication.LoginInterface
-import com.example.student_tasks.repository.LoginRepository
 import com.example.student_tasks.security.PrefHelper
 import com.example.student_tasks.utils.StringConstants
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -16,7 +16,7 @@ import javax.inject.Inject
 class LoginViewModel @Inject constructor(
     private val loginRepo: LoginInterface,
     private val prefHelper: PrefHelper
-): ViewModel() {
+) : ViewModel() {
     private var _responseState = MutableLiveData<String>()
     val responseState get() = _responseState
 
@@ -25,6 +25,9 @@ class LoginViewModel @Inject constructor(
 
     private var _isTokenValid = MutableLiveData<Boolean>()
     val isTokenValid get() = _isTokenValid
+
+    private var _isRefreshSuccess = MutableLiveData<Boolean>()
+    val isRefreshSuccess get() = _isRefreshSuccess
 
     fun loginUser(email: String, password: String) {
         viewModelScope.launch {
@@ -49,14 +52,37 @@ class LoginViewModel @Inject constructor(
 
     fun checkIfUserValid() {
         viewModelScope.launch {
-            if(prefHelper.getUserEmail() == null) {
+            if (prefHelper.getUserEmail() == null) {
                 _userExists.value = false
-            } else if (check validity == false) {
-                _isTokenValid.value = false
+            } else if (isAccessTokenValid()) {
+                _isTokenValid.value = true
             } else {
-            _userExists.value = true
-            _isTokenValid.value = true
+                refreshTokens()
             }
         }
+    }
+
+    private suspend fun refreshTokens() {
+        val email = prefHelper.getUserEmail().toString()
+        val refreshRequest = RefreshRequest(
+            email = email
+        )
+        val response = loginRepo.refreshTokens(refreshRequest = refreshRequest)
+        if (response?.errorBody() == null) {
+            prefHelper.clear()
+            prefHelper.saveUserInfo(
+                response?.body()?.accessToken,
+                response?.body()?.refreshToken,
+                email
+            )
+            _isRefreshSuccess.value = true
+        } else {
+            _isRefreshSuccess.value = false
+        }
+    }
+
+    private suspend fun isAccessTokenValid(): Boolean {
+        val response = loginRepo.checkTokenValidity(prefHelper.getAccessToken().toString())
+        return response?.errorBody() == null
     }
 }

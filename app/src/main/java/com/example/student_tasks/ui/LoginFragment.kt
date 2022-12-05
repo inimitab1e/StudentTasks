@@ -24,8 +24,7 @@ class LoginFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-
+        autoLoginCheck()
 
         binding = FragmentLoginBinding.inflate(inflater, container, false)
         return binding?.root
@@ -48,6 +47,28 @@ class LoginFragment : Fragment() {
                 findNavController().navigate(R.id.action_loginFragment_to_studentsListFragment)
             } else {
                 onErrorLoggedIn(it)
+            }
+        }
+    }
+
+    private fun autoLoginCheck() {
+        loginViewModel.checkIfUserValid()
+
+        loginViewModel.userExists.observe(viewLifecycleOwner) {
+            if (it == false) {
+                findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
+            }
+        }
+
+        loginViewModel.isTokenValid.observe(viewLifecycleOwner) {
+            if (it == true) {
+                findNavController().navigate(R.id.action_loginFragment_to_studentsListFragment)
+            }
+        }
+
+        loginViewModel.isRefreshSuccess.observe(viewLifecycleOwner) {
+            if (it == true) {
+                findNavController().navigate(R.id.action_loginFragment_to_studentsListFragment)
             }
         }
     }
