@@ -26,4 +26,10 @@ class StudentListViewModel @Inject constructor(
             _userList.value = repo.getLocalList()
         }
     }
+
+    fun logout() {
+        viewModelScope.launch {
+            prefHelper.clear()
+        }
+    }
 }

@@ -6,7 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.student_tasks.R
 import com.example.student_tasks.adapters.StudentsListAdapter
 import com.example.student_tasks.databinding.FragmentStudentsListBinding
 import com.example.student_tasks.viewmodel.StudentListViewModel
@@ -37,7 +39,13 @@ class StudentsListFragment : Fragment() {
             layoutManager = LinearLayoutManager(activity)
             adapter = usersAdapter
         }
-        studentListViewModel.userList.observe(viewLifecycleOwner) {
+
+        binding?.btnLogout?.setOnClickListener {
+            studentListViewModel.logout()
+            findNavController().navigate(R.id.action_studentsListFragment_to_loginFragment)
+        }
+
+        studentListViewModel.userList.observe(viewLifecycleOwner) { it ->
             with(usersAdapter) {
                 setUsers(it)
                 notifyDataSetChanged()

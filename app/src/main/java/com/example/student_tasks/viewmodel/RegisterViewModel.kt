@@ -30,7 +30,11 @@ class RegisterViewModel @Inject constructor(
             val response = registerRepo.RegisterUser(registerRequest = registerRequest)
             if (response?.errorBody() == null) {
                 prefHelper.clear()
-                prefHelper.saveUserInfo(response?.body()?.accessToken, email)
+                prefHelper.saveUserInfo(
+                    response?.body()?.accessToken,
+                    response?.body()?.refreshToken,
+                    email = email
+                )
                 _state.value = StringConstants.onSuccessLoggedIn
             } else {
                 _state.value = response.message()

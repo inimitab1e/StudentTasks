@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_navigation"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/launchAppFragment">
 
     <fragment
         android:id="@+id/loginFragment"
@@ -33,5 +33,24 @@
         android:id="@+id/studentsListFragment"
         android:name="com.example.student_tasks.ui.StudentsListFragment"
         android:label="StudentsListFragment"
-        tools:layout="@layout/fragment_students_list"/>
+        tools:layout="@layout/fragment_students_list">
+        <action
+            android:id="@+id/action_studentsListFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/launchAppFragment"
+        android:name="com.example.student_tasks.ui.LaunchAppFragment"
+        android:label="fragment_launch_app"
+        tools:layout="@layout/fragment_launch_app" >
+        <action
+            android:id="@+id/action_launchAppFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_launchAppFragment_to_studentsListFragment"
+            app:destination="@id/studentsListFragment" />
+        <action
+            android:id="@+id/action_launchAppFragment_to_registerFragment"
+            app:destination="@id/registerFragment" />
+    </fragment>
 </navigation>

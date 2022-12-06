@@ -13,11 +13,11 @@ class LoginRepository : LoginInterface {
         return AuthService.getApi()?.login(loginRequest = loginRequest)
     }
 
-    override suspend fun checkTokenValidity(token: String): Response<ValidityResponse>? {
-        return AuthService.getApi()?.checkAccessTokenValidity(token = token)
-    }
-
-    override suspend fun refreshTokens(token: String, refreshRequest: RefreshRequest) : Response<AuthResponse>? {
-        return AuthService.getApi()?.refreshTokens(token = token, refreshRequest = refreshRequest)
-    }
+//    override suspend fun checkTokenValidity(token: String): Response<ValidityResponse>? {
+//        return AuthService.getApi()?.checkAccessTokenValidity(token = token)
+//    }
+//
+//    override suspend fun refreshTokens(token: String, refreshRequest: RefreshRequest) : Response<AuthResponse>? {
+//        return AuthService.getApi()?.refreshTokens(token = token, refreshRequest = refreshRequest)
+//    }
 }

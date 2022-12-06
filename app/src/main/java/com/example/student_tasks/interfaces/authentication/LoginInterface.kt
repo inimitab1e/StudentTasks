@@ -9,7 +9,7 @@ import retrofit2.Response
 interface LoginInterface {
     suspend fun loginUser(loginRequest: LoginRequest): Response<AuthResponse>?
 
-    suspend fun checkTokenValidity(token: String): Response<ValidityResponse>?
-
-    suspend fun refreshTokens(token: String, refreshRequest: RefreshRequest) : Response<AuthResponse>?
+//    suspend fun checkTokenValidity(token: String): Response<ValidityResponse>?
+//
+//    suspend fun refreshTokens(token: String, refreshRequest: RefreshRequest) : Response<AuthResponse>?
 }

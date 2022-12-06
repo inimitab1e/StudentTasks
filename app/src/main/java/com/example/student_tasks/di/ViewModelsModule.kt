@@ -2,9 +2,11 @@ package com.example.student_tasks.di
 
 import android.content.Context
 import com.example.student_tasks.data.room.UserRepository
+import com.example.student_tasks.interfaces.authentication.LaunchAppInterface
 import com.example.student_tasks.interfaces.authentication.LoginInterface
 import com.example.student_tasks.interfaces.authentication.RegisterInterface
 import com.example.student_tasks.interfaces.content.StudentListInterface
+import com.example.student_tasks.repository.LaunchAppRepository
 import com.example.student_tasks.repository.LoginRepository
 import com.example.student_tasks.repository.RegisterRepository
 import com.example.student_tasks.repository.StudentListRepository
@@ -39,6 +41,11 @@ class ViewModelsModule {
     @Provides
     fun provideLoginRepository() : LoginInterface {
         return LoginRepository()
+    }
+
+    @Provides
+    fun provideLaunchAppRepository() : LaunchAppInterface {
+        return LaunchAppRepository()
     }
 
     @Provides
