@@ -1,5 +1,6 @@
 package com.example.student_tasks.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -64,6 +65,6 @@ class LaunchAppViewModel @Inject constructor(
 
     private suspend fun isAccessTokenValid(): Boolean {
         val response = launchAppRepo.checkTokenValidity("Bearer " + prefHelper.getAccessToken().toString())
-        return response?.errorBody() == null
+        return (response?.errorBody() == null)
     }
 }

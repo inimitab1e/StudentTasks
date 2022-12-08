@@ -33,7 +33,7 @@ class RegisterFragment : Fragment() {
 
         binding?.apply {
             textLoginLink.setOnClickListener {
-                findNavController().navigateUp()
+                findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
             }
 
             btnCreateAccount.setOnClickListener {
@@ -66,4 +66,5 @@ class RegisterFragment : Fragment() {
         super.onDestroyView()
         binding = null
     }
+
 }

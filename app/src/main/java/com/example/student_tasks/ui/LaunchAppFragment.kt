@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.student_tasks.R
 import com.example.student_tasks.utils.StringConstants
@@ -28,29 +29,34 @@ class LaunchAppFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         //Thread.sleep(20000)
-        //autoLoginCheck()
-        launchAppViewModel.userExists.observe(viewLifecycleOwner) {
+        autoLoginCheck()
+    }
+
+    private fun moveToRegister() {
+        findNavController().navigate(R.id.action_launchAppFragment_to_loginFragment)
+    }
+
+    private fun autoLoginCheck() {
+        launchAppViewModel.userExists.observe(viewLifecycleOwner) { it ->
             if (it == StringConstants.userNotExists) {
                 findNavController().navigate(R.id.action_launchAppFragment_to_registerFragment)
             }
         }
 
-        launchAppViewModel.isTokenValid.observe(viewLifecycleOwner) {
+        launchAppViewModel.isTokenValid.observe(viewLifecycleOwner) { it ->
             if (it == StringConstants.tokenValid) {
                 findNavController().navigate(R.id.action_launchAppFragment_to_studentsListFragment)
+            } else {
+                findNavController().navigate(R.id.action_launchAppFragment_to_loginFragment)
             }
         }
 
-        launchAppViewModel.isRefreshSuccess.observe(viewLifecycleOwner) {
+        launchAppViewModel.isRefreshSuccess.observe(viewLifecycleOwner) { it ->
             if (it == StringConstants.refreshSuccess) {
                 findNavController().navigate(R.id.action_launchAppFragment_to_studentsListFragment)
+            } else {
+                findNavController().navigate(R.id.action_launchAppFragment_to_loginFragment)
             }
         }
-        findNavController().navigate(R.id.action_launchAppFragment_to_loginFragment)
     }
-
-//    private fun autoLoginCheck() {
-//
-//
-//    }
 }
