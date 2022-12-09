@@ -4,9 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".data.model.ProfileFragment">
+    tools:context=".ui.ProfileFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="56dp"
@@ -26,7 +25,50 @@
         <ImageButton
             android:layout_width="56dp"
             android:layout_height="56dp"
-            android:layout_marginStart="120dp"/>
+            android:layout_marginStart="116dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="30dp">
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="24dp"
+            android:background="@color/white"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_marginStart="25dp"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:fontFamily="@font/inter_bold"
+                android:text="Aleksandr Nikolaev"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_marginStart="25dp"
+                android:text="inimitable73@gmail.com"
+                android:textSize="12sp"
+                android:fontFamily="@font/inter"
+                android:textColor="@color/hint_gray" />
+
+        </LinearLayout>
+
+<!--    appearing edit profile area-->
 
     </LinearLayout>
 

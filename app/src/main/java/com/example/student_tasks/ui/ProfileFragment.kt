@@ -1,4 +1,4 @@
-package com.example.student_tasks.data.model
+package com.example.student_tasks.ui
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
