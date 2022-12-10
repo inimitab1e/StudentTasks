@@ -11,7 +11,7 @@
         android:title="Профиль" />
 
     <item
-        android:id="@+id/unknown"
-        android:icon="@drawable/ic_baseline_outlet_24"
-        android:title="Unknown" />
+        android:id="@+id/subjectsListFragment"
+        android:icon="@drawable/ic_baseline_menu_book_24"
+        android:title="Предметы" />
 </menu>
