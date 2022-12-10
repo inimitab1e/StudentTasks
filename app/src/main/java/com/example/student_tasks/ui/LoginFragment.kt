@@ -6,16 +6,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.example.student_tasks.MainActivity
 import com.example.student_tasks.R
 import com.example.student_tasks.databinding.FragmentLoginBinding
 import com.example.student_tasks.utils.StringConstants
 import com.example.student_tasks.viewmodel.LoginViewModel
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class LoginFragment : Fragment() {
+class LoginFragment() : Fragment() {
 
     private var binding: FragmentLoginBinding? = null
     private val loginViewModel by viewModels<LoginViewModel>()

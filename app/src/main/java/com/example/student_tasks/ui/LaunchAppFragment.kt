@@ -22,28 +22,24 @@ class LaunchAppFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        launchAppViewModel.checkIfUserValid()
+
         return inflater.inflate(R.layout.fragment_launch_app, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //Thread.sleep(20000)
+        launchAppViewModel.checkIfUserValid()
         autoLoginCheck()
     }
 
-    private fun moveToRegister() {
-        findNavController().navigate(R.id.action_launchAppFragment_to_loginFragment)
-    }
-
     private fun autoLoginCheck() {
-        launchAppViewModel.userExists.observe(viewLifecycleOwner) { it ->
+        launchAppViewModel.userExists.observe(viewLifecycleOwner) {
             if (it == StringConstants.userNotExists) {
                 findNavController().navigate(R.id.action_launchAppFragment_to_registerFragment)
             }
         }
 
-        launchAppViewModel.isTokenValid.observe(viewLifecycleOwner) { it ->
+        launchAppViewModel.isTokenValid.observe(viewLifecycleOwner) {
             if (it == StringConstants.tokenValid) {
                 findNavController().navigate(R.id.action_launchAppFragment_to_studentsListFragment)
             } else {
@@ -51,7 +47,7 @@ class LaunchAppFragment : Fragment() {
             }
         }
 
-        launchAppViewModel.isRefreshSuccess.observe(viewLifecycleOwner) { it ->
+        launchAppViewModel.isRefreshSuccess.observe(viewLifecycleOwner) {
             if (it == StringConstants.refreshSuccess) {
                 findNavController().navigate(R.id.action_launchAppFragment_to_studentsListFragment)
             } else {
