@@ -35,9 +35,9 @@ class RegisterViewModel @Inject constructor(
                     response?.body()?.refreshToken,
                     email = email
                 )
-                _state.value = StringConstants.onSuccessLoggedIn
+                _state.postValue(StringConstants.onSuccessLoggedIn)
             } else {
-                _state.value = response.message()
+                _state.postValue(response.message())
             }
         }
     }

@@ -60,7 +60,7 @@
         tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/subjectsListFragment"
-        android:name="com.example.student_tasks.ui.SubjectsListFragment"
+        android:name="com.example.student_tasks.ui.FacultyListFragment"
         android:label="fragment_subjects_list"
         tools:layout="@layout/fragment_subjects_list" />
 </navigation>

@@ -5,10 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.student_tasks.R
 import com.example.student_tasks.databinding.FragmentSubjectsListBinding
 
-class SubjectsListFragment : Fragment() {
+class FacultyListFragment : Fragment() {
     private var binding: FragmentSubjectsListBinding? = null
 
     override fun onCreateView(
