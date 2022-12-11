@@ -5,6 +5,9 @@ import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.example.student_tasks.R
 import com.example.student_tasks.data.model.ExpandableFacAndSpecModel
@@ -19,13 +22,13 @@ class FacultyAndSpecialityListAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when(viewType) {
             ExpandableFacAndSpecModel.PARENT -> {FacAndSpecParentViewHolder(LayoutInflater.from(parent.context).inflate(
-                R.layout.expandable_parent_item, parent, false))}
+                R.layout.faculty_and_speciality_list_parent_item, parent, false))}
 
             ExpandableFacAndSpecModel.CHILD -> { FacAndSpecChildViewHolder(LayoutInflater.from(parent.context).inflate(
-                R.layout.expandable_child_item, parent, false))  }
+                R.layout.faculty_and_speciality_list_child_item, parent, false))  }
 
             else -> {FacAndSpecParentViewHolder(LayoutInflater.from(parent.context).inflate(
-                R.layout.expandable_parent_item, parent, false))}
+                R.layout.faculty_and_speciality_list_parent_item, parent, false))}
         }
     }
 
@@ -35,7 +38,7 @@ class FacultyAndSpecialityListAdapter(
         val row = facAndSpecModelList[position]
         when(row.type){
             ExpandableFacAndSpecModel.PARENT -> {
-                (holder as FacAndSpecParentViewHolder).countryName.text = row.facultyParent.facultyName
+                (holder as FacAndSpecParentViewHolder).facultyName.text = row.facultyParent.facultyName
                 holder.closeImage.setOnClickListener {
                     if (row.isExpanded) {
                         row.isExpanded = false
@@ -64,12 +67,10 @@ class FacultyAndSpecialityListAdapter(
 
             ExpandableFacAndSpecModel.CHILD -> {
                 (holder as FacAndSpecChildViewHolder).specialityName.text = row.facultyChild.specialityName
-                holder.capitalImage.text = row.countryChild.capital
             }
         }
 
     }
-
 
     override fun getItemViewType(position: Int): Int = facAndSpecModelList[position].type
 
@@ -78,54 +79,47 @@ class FacultyAndSpecialityListAdapter(
         var nextPosition = position
         when (row.type) {
             ExpandableFacAndSpecModel.PARENT -> {
-                for(child in row.countryParent.states) {
+                for(child in row.facultyParent.specialityList) {
                     facAndSpecModelList.add(++nextPosition, ExpandableFacAndSpecModel(ExpandableFacAndSpecModel.CHILD, child))
                 }
                 notifyDataSetChanged()
             }
-            ExpandableCountryModel.CHILD -> {
+            ExpandableFacAndSpecModel.CHILD -> {
                 notifyDataSetChanged()
             }
         }
     }
 
     private fun collapseRow(position: Int){
-        val row = countryStateModelList[position]
+        val row = facAndSpecModelList[position]
         var nextPosition = position + 1
         when (row.type) {
-            ExpandableCountryModel.PARENT -> {
+            ExpandableFacAndSpecModel.PARENT -> {
                 outerloop@ while (true) {
                     //  println("Next Position during Collapse $nextPosition size is ${shelfModelList.size} and parent is ${shelfModelList[nextPosition].type}")
-
-                    if (nextPosition == countryStateModelList.size || countryStateModelList[nextPosition].type == ExpandableCountryModel.PARENT) {
+                    if (nextPosition == facAndSpecModelList.size || facAndSpecModelList[nextPosition].type == ExpandableFacAndSpecModel.PARENT) {
                         /* println("Inside break $nextPosition and size is ${closedShelfModelList.size}")
                          closedShelfModelList[closedShelfModelList.size-1].isExpanded = false
                          println("Modified closedShelfModelList ${closedShelfModelList.size}")*/
                         break@outerloop
                     }
-
-                    countryStateModelList.removeAt(nextPosition)
+                    facAndSpecModelList.removeAt(nextPosition)
                 }
-
                 notifyDataSetChanged()
             }
-
-
         }
     }
 
     class FacAndSpecParentViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        internal var layout = itemView.country_item_parent_container
-        internal var countryName : TextView = itemView.country_name
-        internal var closeImage = itemView.close_arrow
-        internal var upArrowImg = itemView.up_arrow
+        internal var layout = itemView.findViewById<ConstraintLayout>(R.id.fac_and_spec_parent_container)
+        internal var facultyName = itemView.findViewById<TextView>(R.id.faculty_name)
+        internal var closeImage = itemView.findViewById<ImageView>(R.id.close_arrow)
+        internal var upArrowImg = itemView.findViewById<ImageView>(R.id.up_arrow)
 
     }
 
     class FacAndSpecChildViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        internal var layout = itemView.country_item_child_container
-        internal var stateName : TextView = itemView.state_name
-        internal var capitalImage = itemView.capital_name
-
+        internal var layout = itemView.findViewById<ConstraintLayout>(R.id.fac_and_spec_child_container)
+        internal var specialityName = itemView.findViewById<TextView>(R.id.speciality_name)
     }
 }
