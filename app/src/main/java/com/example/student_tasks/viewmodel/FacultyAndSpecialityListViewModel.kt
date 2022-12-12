@@ -9,7 +9,7 @@ import javax.inject.Inject
 @HiltViewModel
 class FacultyAndSpecialityListViewModel @Inject constructor(
     private val dispatcher: CoroutineDispatcher,
-    private val countryStateRepository: CountryStateRepository
+    private val facAndSpecRepo: CountryStateRepository
     ) : ViewModel(),
     LifecycleObserver {
     private val LOG_TAG = "CountryStateViewModel"
