@@ -5,11 +5,9 @@ import com.example.student_tasks.data.room.UserRepository
 import com.example.student_tasks.interfaces.authentication.LaunchAppInterface
 import com.example.student_tasks.interfaces.authentication.LoginInterface
 import com.example.student_tasks.interfaces.authentication.RegisterInterface
+import com.example.student_tasks.interfaces.content.FacultyAndSpecialityListInterface
 import com.example.student_tasks.interfaces.content.StudentListInterface
-import com.example.student_tasks.repository.LaunchAppRepository
-import com.example.student_tasks.repository.LoginRepository
-import com.example.student_tasks.repository.RegisterRepository
-import com.example.student_tasks.repository.StudentListRepository
+import com.example.student_tasks.repository.*
 import com.example.student_tasks.security.PrefHelper
 import dagger.Module
 import dagger.Provides
@@ -46,6 +44,11 @@ class ViewModelsModule {
     @Provides
     fun provideLaunchAppRepository() : LaunchAppInterface {
         return LaunchAppRepository()
+    }
+
+    @Provides
+    fun provideFacAndSpecListRepository() : FacultyAndSpecialityListInterface {
+        return FacultyAndSpecialityListRepository()
     }
 
     @Provides

@@ -13,7 +13,6 @@ import com.example.student_tasks.R
 import com.example.student_tasks.data.model.ExpandableFacAndSpecModel
 
 class FacultyAndSpecialityListAdapter(
-    var context: Context,
     var facAndSpecModelList:MutableList<ExpandableFacAndSpecModel>
     ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private var isFirstItemExpanded : Boolean = true

@@ -1,6 +1,10 @@
 package com.example.student_tasks.viewmodel
 
+import android.content.Context
 import androidx.lifecycle.*
+import com.example.student_tasks.data.model.ExpandableFacAndSpecModel
+import com.example.student_tasks.data.model.FacultyAndSpecialityModel
+import com.example.student_tasks.interfaces.content.FacultyAndSpecialityListInterface
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
@@ -8,56 +12,50 @@ import javax.inject.Inject
 
 @HiltViewModel
 class FacultyAndSpecialityListViewModel @Inject constructor(
-    private val dispatcher: CoroutineDispatcher,
-    private val facAndSpecRepo: CountryStateRepository
-    ) : ViewModel(),
-    LifecycleObserver {
-    private val LOG_TAG = "CountryStateViewModel"
-    var loading: MutableLiveData<Boolean> = MutableLiveData()
-    private val _obtainCountryStatesResponse= MutableLiveData<ResultOf<StateCapital>>()
-    val  obtainCountryStatesResponse: LiveData<ResultOf<StateCapital>> = _obtainCountryStatesResponse
+    private val facAndSpecRepo: FacultyAndSpecialityListInterface
+) : ViewModel() {
+    private val _facAndSpecResponse= MutableLiveData<FacultyAndSpecialityModel>()
+    val  facAndSpecResponse: LiveData<FacultyAndSpecialityModel> = _facAndSpecResponse
 
-    fun obtainCountryStateCapitals(){
-        loading.postValue(true)
-
-        viewModelScope.launch(dispatcher){
-            var  errorCode = -1
-            try{
-                var stateCapitalResponse =  countryStateRepository.fetchCountryStateCapitals()
-                stateCapitalResponse?.let {
-                    loading.postValue(false)
-                    _obtainCountryStatesResponse.postValue(ResultOf.Success(it))
-                }
-
-            }catch (e : Exception){
-                loading.postValue(false)
-                e.printStackTrace()
-                if(errorCode != -1){
-                    _obtainCountryStatesResponse.postValue(ResultOf.Failure("Failed with Error Code ${errorCode} ", e))
-                }else{
-                    _obtainCountryStatesResponse.postValue(ResultOf.Failure("Failed with Exception ${e.message} ", e))
-                }
-            }
+    fun obtainFacAndSpec(context: Context) {
+        viewModelScope.launch() {
+            var stateCapitalResponse = facAndSpecRepo.fetchFacAndSpec(context)
+            _facAndSpecResponse.postValue(stateCapitalResponse)
         }
     }
 
-    fun prepareDataForExpandableAdapter(stateCapital: StateCapital) : MutableList<ExpandableFacAndSpecModel>{
-        var expandableCountryModel = mutableListOf<ExpandableFacAndSpecModel>()
-        for (states in stateCapital.countries) {
-            expandableCountryModel.add(ExpandableFacAndSpecModel(ExpandableFacAndSpecModel.PARENT,states))
+    fun prepareDataForExpandableAdapter(facAndSpec: FacultyAndSpecialityModel): MutableList<ExpandableFacAndSpecModel> {
+        var expandableFacultyModel = mutableListOf<ExpandableFacAndSpecModel>()
+        for (faculty in facAndSpec.facultyList) {
+            expandableFacultyModel.add(
+                ExpandableFacAndSpecModel(
+                    ExpandableFacAndSpecModel.PARENT,
+                    faculty
+                )
+            )
         }
-        return expandableCountryModel
+        return expandableFacultyModel
     }
 
 
-    fun prepareDataForSectionedAdapter(stateCapital: StateCapital) : MutableList<ExpandableFacAndSpecModel>{
-        var expandableCountryModel = mutableListOf<ExpandableFacAndSpecModel>()
-        for (states in stateCapital.countries) {
-            expandableCountryModel.add(ExpandableFacAndSpecModel(ExpandableFacAndSpecModel.PARENT,states))
-            for(capitals in states.states){
-                expandableCountryModel.add(ExpandableFacAndSpecModel(ExpandableFacAndSpecModel.CHILD,capitals))
-            }
-        }
-        return expandableCountryModel
-    }
+//    fun prepareDataForSectionedAdapter(facAndSpec: FacultyAndSpecialityModel): MutableList<ExpandableFacAndSpecModel> {
+//        var expandableFacultyModel = mutableListOf<ExpandableFacAndSpecModel>()
+//        for (faculty in facAndSpec.facultyList) {
+//            expandableFacultyModel.add(
+//                ExpandableFacAndSpecModel(
+//                    ExpandableFacAndSpecModel.PARENT,
+//                    faculty
+//                )
+//            )
+//            for (specialities in faculty.specialityList) {
+//                expandableFacultyModel.add(
+//                    ExpandableFacAndSpecModel(
+//                        ExpandableFacAndSpecModel.CHILD,
+//                        specialities
+//                    )
+//                )
+//            }
+//        }
+//        return expandableFacultyModel
+//    }
 }

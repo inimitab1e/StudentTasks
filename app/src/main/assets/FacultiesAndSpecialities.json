@@ -1,0 +1,22 @@
+{
+  "facultyList": [
+    {
+      "facultyName": "fmiat",
+      "specialityList": [
+        {"specialityName": "ibas"},
+        {"specialityName": "kb"},
+        {"specialityName": "pm"},
+        {"specialityName": "pri"}
+      ]
+    },
+
+    {
+      "country": "gumanitarniy",
+      "states": [
+        {"specialityName": "history"},
+        {"specialityName": "obshestvo"},
+        {"specialityName": "biology"}
+      ]
+    }
+  ]
+}
