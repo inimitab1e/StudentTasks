@@ -11,8 +11,8 @@
     },
 
     {
-      "country": "gumanitarniy",
-      "states": [
+      "facultyName": "gumanitarniy",
+      "specialityList": [
         {"specialityName": "history"},
         {"specialityName": "obshestvo"},
         {"specialityName": "biology"}

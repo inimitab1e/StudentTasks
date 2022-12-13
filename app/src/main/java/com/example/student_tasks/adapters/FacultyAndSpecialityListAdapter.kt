@@ -1,6 +1,5 @@
 package com.example.student_tasks.adapters
 
-import android.content.Context
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
@@ -62,8 +61,6 @@ class FacultyAndSpecialityListAdapter(
                     }
                 }
             }
-
-
             ExpandableFacAndSpecModel.CHILD -> {
                 (holder as FacAndSpecChildViewHolder).specialityName.text = row.facultyChild.specialityName
             }
@@ -79,7 +76,9 @@ class FacultyAndSpecialityListAdapter(
         when (row.type) {
             ExpandableFacAndSpecModel.PARENT -> {
                 for(child in row.facultyParent.specialityList) {
-                    facAndSpecModelList.add(++nextPosition, ExpandableFacAndSpecModel(ExpandableFacAndSpecModel.CHILD, child))
+                    with(facAndSpecModelList) {
+                        add(++nextPosition, ExpandableFacAndSpecModel(ExpandableFacAndSpecModel.CHILD, child))
+                    }
                 }
                 notifyDataSetChanged()
             }
