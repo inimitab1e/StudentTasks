@@ -1,16 +1,16 @@
 package com.example.student_tasks.data.model
 
-class ExpandableFacAndSpecModel{
-    companion object{
+class ExpandableFacAndSpecModel {
+    companion object {
         const val PARENT = 1
         const val CHILD = 2
-
     }
+
     lateinit var facultyParent: FacultyAndSpecialityModel.Faculty
-    var type : Int
-    lateinit var facultyChild : FacultyAndSpecialityModel.Faculty.Speciality
-    var isExpanded : Boolean
-    private var isCloseShown : Boolean
+    var type: Int
+    lateinit var facultyChild: FacultyAndSpecialityModel.Faculty.Speciality
+    var isExpanded: Boolean
+    private var isCloseShown: Boolean
 
     constructor(
         type: Int,
@@ -22,7 +22,6 @@ class ExpandableFacAndSpecModel{
         this.facultyParent = facultyParent
         this.isExpanded = isExpanded
         this.isCloseShown = isCloseShown
-
     }
 
     constructor(
@@ -35,7 +34,5 @@ class ExpandableFacAndSpecModel{
         this.facultyChild = facultyChild
         this.isExpanded = isExpanded
         this.isCloseShown = isCloseShown
-
-
     }
 }

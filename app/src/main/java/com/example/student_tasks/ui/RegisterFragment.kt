@@ -43,7 +43,7 @@ class RegisterFragment : Fragment() {
 
         registerViewModel.state.observe(viewLifecycleOwner) {
             if (it == StringConstants.onSuccessLoggedIn) {
-                findNavController().navigate(R.id.action_loginFragment_to_studentsListFragment)
+                findNavController().navigate(R.id.action_registerFragment_to_studentsListFragment)
             } else {
                 onErrorLoggedUp(it)
             }
