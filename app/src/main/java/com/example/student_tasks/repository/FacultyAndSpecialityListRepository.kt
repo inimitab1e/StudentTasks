@@ -15,7 +15,7 @@ class FacultyAndSpecialityListRepository : FacultyAndSpecialityListInterface {
             .use { it.readText() }
         val gson = Gson()
         val objectFacAndSpecType: Type = object : TypeToken<FacultyAndSpecialityModel>() {}.type
-        var facAndSpec = gson.fromJson<FacultyAndSpecialityModel>(jsonString, objectFacAndSpecType)
+        val facAndSpec = gson.fromJson<FacultyAndSpecialityModel>(jsonString, objectFacAndSpecType)
         return facAndSpec
     }
 }

@@ -1,6 +1,5 @@
 package com.example.student_tasks.adapters
 
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -41,9 +40,9 @@ class FacultyAndSpecialityListAdapter(
                     if (row.isExpanded) {
                         row.isExpanded = false
                         collapseRow(position)
-                        holder.layout.setBackgroundColor(Color.WHITE)
+                        //holder.layout.setBackgroundColor(Color.WHITE)
                     } else {
-                        holder.layout.setBackgroundColor(Color.GRAY)
+                        //holder.layout.setBackgroundColor(Color.GRAY)
                         row.isExpanded = true
                         holder.upArrowImg.visibility = View.VISIBLE
                         holder.closeImage.visibility = View.GONE
@@ -54,7 +53,7 @@ class FacultyAndSpecialityListAdapter(
                     if(row.isExpanded){
                         row.isExpanded = false
                         collapseRow(position)
-                        holder.layout.setBackgroundColor(Color.WHITE)
+                        //holder.layout.setBackgroundColor(Color.WHITE)
                         holder.upArrowImg.visibility = View.GONE
                         holder.closeImage.visibility = View.VISIBLE
 
