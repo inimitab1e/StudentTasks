@@ -45,7 +45,7 @@ class LaunchAppViewModel @Inject constructor(
                 email = email
             )
             val response = launchAppRepo.refreshTokens(
-                token = prefHelper.getRefreshToken().toString(),
+                token = "Bearer " + prefHelper.getRefreshToken().toString(),
                 refreshRequest = refreshRequest
             )
             if (response?.errorBody() == null) {
