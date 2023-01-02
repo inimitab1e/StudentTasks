@@ -26,10 +26,4 @@ interface AuthService {
 
     @GET("/users")
     suspend fun updateUsersList(@Header("Authorization") token: String): Response<UsersListResponse>
-
-    companion object {
-        fun getApi(): AuthService? {
-            return ApiClient.client?.create(AuthService::class.java)
-        }
-    }
 }

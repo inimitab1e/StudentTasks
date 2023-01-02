@@ -6,13 +6,16 @@ import com.example.student_tasks.data.model.ValidityResponse
 import com.example.student_tasks.interfaces.authentication.LaunchAppInterface
 import com.example.student_tasks.network.AuthService
 import retrofit2.Response
+import javax.inject.Inject
 
-class LaunchAppRepository: LaunchAppInterface {
-    override suspend fun checkTokenValidity(token: String): Response<ValidityResponse>? {
-        return AuthService.getApi()?.checkAccessTokenValidity(token = token)
+class LaunchAppRepository @Inject constructor(
+    private val authService: AuthService
+): LaunchAppInterface {
+    override suspend fun checkTokenValidity(token: String): Response<ValidityResponse> {
+        return authService.checkAccessTokenValidity(token = token)
     }
 
-    override suspend fun refreshTokens(token: String, refreshRequest: RefreshRequest) : Response<AuthResponse>? {
-        return AuthService.getApi()?.refreshTokens(token = token, refreshRequest = refreshRequest)
+    override suspend fun refreshTokens(token: String, refreshRequest: RefreshRequest) : Response<AuthResponse> {
+        return authService.refreshTokens(token = token, refreshRequest = refreshRequest)
     }
 }

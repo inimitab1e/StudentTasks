@@ -7,6 +7,7 @@ import com.example.student_tasks.interfaces.authentication.LoginInterface
 import com.example.student_tasks.interfaces.authentication.RegisterInterface
 import com.example.student_tasks.interfaces.content.FacultyAndSpecialityListInterface
 import com.example.student_tasks.interfaces.content.StudentListInterface
+import com.example.student_tasks.network.AuthService
 import com.example.student_tasks.repository.*
 import com.example.student_tasks.security.PrefHelper
 import dagger.Module
@@ -15,43 +16,52 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import retrofit2.Retrofit
 import javax.inject.Singleton
 
 @Module
-@InstallIn(ViewModelComponent::class)
-class ViewModelsModule {
+@InstallIn(SingletonComponent::class)
+object RepositoriesModule {
 
     @Provides
-    fun provideStudentListRepository(@ApplicationContext context: Context) : StudentListInterface {
-        return StudentListRepository(roomRepo = UserRepository(context))
+    @Singleton
+    fun provideStudentListRepository(@ApplicationContext context: Context, client : Retrofit) : StudentListInterface {
+        return StudentListRepository(roomRepo = UserRepository(context),
+            authService = client.create(AuthService::class.java))
     }
 
     @Provides
+    @Singleton
     fun provideRoomUsersRepository(@ApplicationContext context: Context) : UserRepository {
         return UserRepository(context = context)
     }
 
     @Provides
-    fun provideRegisterRepository() : RegisterInterface {
-        return RegisterRepository()
+    @Singleton
+    fun provideRegisterRepository(client : Retrofit) : RegisterInterface {
+        return RegisterRepository(authService = client.create(AuthService::class.java))
     }
 
     @Provides
-    fun provideLoginRepository() : LoginInterface {
-        return LoginRepository()
+    @Singleton
+    fun provideLoginRepository(client : Retrofit) : LoginInterface {
+        return LoginRepository(authService = client.create(AuthService::class.java))
     }
 
     @Provides
-    fun provideLaunchAppRepository() : LaunchAppInterface {
-        return LaunchAppRepository()
+    @Singleton
+    fun provideLaunchAppRepository(client : Retrofit) : LaunchAppInterface {
+        return LaunchAppRepository(authService = client.create(AuthService::class.java))
     }
 
     @Provides
+    @Singleton
     fun provideFacAndSpecListRepository() : FacultyAndSpecialityListInterface {
         return FacultyAndSpecialityListRepository()
     }
 
     @Provides
+    @Singleton
     fun providePrefHelper(@ApplicationContext context: Context) : PrefHelper {
         return PrefHelper(context = context)
     }

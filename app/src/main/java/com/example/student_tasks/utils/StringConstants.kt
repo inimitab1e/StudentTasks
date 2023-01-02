@@ -5,5 +5,6 @@ object StringConstants {
     const val userNotExists = "User does not exists"
     const val tokenValid = "Token valid"
     const val refreshSuccess = "Refresh success"
-    const val refreshFailed= "Refresh failed"
+    const val refreshFailed = "Refresh failed"
+    const val bearerHeader = "Authorization"
 }

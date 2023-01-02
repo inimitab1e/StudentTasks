@@ -11,11 +11,10 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-class DataModule {
+object DataModule {
 
     @Provides
     @Singleton
-    fun provideRoomUsersRepository(@ApplicationContext context: Context) : UserRepository {
-        return UserRepository(context = context)
-    }
+    fun provideRoomUsersRepository(@ApplicationContext context: Context) : UserRepository =
+        UserRepository(context = context)
 }
