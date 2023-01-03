@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.student_tasks.R
 import com.example.student_tasks.adapters.StudentsListAdapter
 import com.example.student_tasks.databinding.FragmentStudentsListBinding
-import com.example.student_tasks.viewmodel.StudentListViewModel
+import com.example.student_tasks.ui.viewmodel.StudentListViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 

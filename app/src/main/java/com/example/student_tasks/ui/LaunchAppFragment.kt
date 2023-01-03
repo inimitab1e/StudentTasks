@@ -6,12 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.student_tasks.R
 import com.example.student_tasks.utils.StringConstants
-import com.example.student_tasks.viewmodel.LaunchAppViewModel
+import com.example.student_tasks.ui.viewmodel.LaunchAppViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 @AndroidEntryPoint
 class LaunchAppFragment : Fragment() {
@@ -43,7 +43,7 @@ class LaunchAppFragment : Fragment() {
 
         //check if access token valid or not
         launchAppViewModel.isTokenValid.observe(viewLifecycleOwner) {
-            if (it == StringConstants.tokenValid) {
+            if (it == StringConstants.tokenIsValid) {
                 findNavController().navigate(R.id.action_launchAppFragment_to_studentsListFragment)
             } else {
                 findNavController().navigate(R.id.action_launchAppFragment_to_loginFragment)

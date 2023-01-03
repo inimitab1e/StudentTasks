@@ -1,12 +1,16 @@
 package com.example.student_tasks.di
 
+import android.content.Context
 import com.example.student_tasks.network.AuthService
+import com.example.student_tasks.security.PrefHelper
+import com.example.student_tasks.utils.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
@@ -15,22 +19,35 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
 
+    private val interceptorTypeSelector = InterceptorTypeSelector()
+
     @Provides
     @Singleton
-    fun provideOkHttpClient() : OkHttpClient {
-        val mHttpLoggingInterceptor = HttpLoggingInterceptor()
-            .setLevel(HttpLoggingInterceptor.Level.BODY)
-
+    fun provideOkHttpClient(
+        @ApplicationContext context: Context,
+        prefHelper: PrefHelper
+    ): OkHttpClient {
         return OkHttpClient
             .Builder()
-            .addInterceptor(mHttpLoggingInterceptor)
-//            .addInterceptor(createAuthorizationInterceptor())
+            .addInterceptor(
+                getChuckerInterceptor(context).activeForType(
+                    InterceptorType.APPLICATION,
+                    interceptorTypeSelector
+                )
+            )
+            .addNetworkInterceptor(
+                getChuckerInterceptor(context).activeForType(
+                    InterceptorType.NETWORK,
+                    interceptorTypeSelector
+                )
+            )
+            .addInterceptor(createAuthorizationInterceptor(prefHelper))
             .build()
     }
 
     @Provides
     @Singleton
-    fun provideRetrofit(mOkHttpClient : OkHttpClient) : Retrofit {
+    fun provideRetrofit(mOkHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
             .baseUrl("http://10.0.2.2:8080")
             .client(mOkHttpClient)
@@ -40,19 +57,7 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideAuthService(client : Retrofit) : AuthService {
+    fun provideAuthService(client: Retrofit): AuthService {
         return client.create(AuthService::class.java)
     }
-
-//    private fun createAuthorizationInterceptor(): Interceptor {
-//        val prefHelper: PrefHelper? = null
-//        return Interceptor { chain ->
-//            val newBuilder = chain.request().newBuilder()
-//            val token = prefHelper?.getAccessToken()
-//            if (token != null) {
-//                newBuilder.addHeader("Authorization", StringConstants.bearerHeader + token)
-//            }
-//            return@Interceptor chain.proceed(newBuilder.build())
-//        }
-//    }
 }

@@ -1,4 +1,4 @@
-package com.example.student_tasks.viewmodel
+package com.example.student_tasks.ui.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

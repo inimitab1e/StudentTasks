@@ -6,7 +6,7 @@ import com.example.student_tasks.data.model.ValidityResponse
 import retrofit2.Response
 
 interface LaunchAppInterface {
-    suspend fun checkTokenValidity(token: String): Response<ValidityResponse>?
+    suspend fun checkTokenValidity(): Response<ValidityResponse>?
 
-    suspend fun refreshTokens(token: String, refreshRequest: RefreshRequest) : Response<AuthResponse>?
+    suspend fun refreshTokens(refreshRequest: RefreshRequest) : Response<AuthResponse>?
 }

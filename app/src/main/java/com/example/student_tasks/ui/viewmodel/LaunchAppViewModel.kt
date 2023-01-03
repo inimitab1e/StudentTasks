@@ -1,4 +1,4 @@
-package com.example.student_tasks.viewmodel
+package com.example.student_tasks.ui.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,6 +9,7 @@ import com.example.student_tasks.security.PrefHelper
 import com.example.student_tasks.utils.StringConstants
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -31,8 +32,10 @@ class LaunchAppViewModel @Inject constructor(
             if (prefHelper.getUserEmail() == null) {
                 _userExists.postValue(StringConstants.userNotExists)
             } else if (isAccessTokenValid()) {
-                _isTokenValid.postValue(StringConstants.tokenValid)
+                Timber.e("awdawd")
+                _isTokenValid.postValue(StringConstants.tokenIsValid)
             } else {
+
                 refreshTokens()
             }
         }
@@ -40,12 +43,13 @@ class LaunchAppViewModel @Inject constructor(
 
     private fun refreshTokens() {
         viewModelScope.launch {
+            prefHelper.deleteKey(key = "AccessToken")
+            Timber.d("Access token after delete" + prefHelper.getAccessToken())
             val email = prefHelper.getUserEmail().toString()
             val refreshRequest = RefreshRequest(
                 email = email
             )
             val response = launchAppRepo.refreshTokens(
-                token = "Bearer " + prefHelper.getRefreshToken().toString(),
                 refreshRequest = refreshRequest
             )
             if (response?.errorBody() == null) {
@@ -59,11 +63,13 @@ class LaunchAppViewModel @Inject constructor(
             } else {
                 _isRefreshSuccess.postValue(StringConstants.refreshFailed)
             }
+            Timber.d("Access token install" + prefHelper.getAccessToken())
         }
     }
 
     private suspend fun isAccessTokenValid(): Boolean {
-        val response = launchAppRepo.checkTokenValidity("Bearer " + prefHelper.getAccessToken().toString())
-        return (response?.errorBody() == null)
+        val response = launchAppRepo.checkTokenValidity()
+        Timber.e(response.toString())
+        return (response?.errorBody() != null)
     }
 }

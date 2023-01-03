@@ -1,4 +1,4 @@
-package com.example.student_tasks.viewmodel
+package com.example.student_tasks.ui.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -20,7 +20,7 @@ class StudentListViewModel @Inject constructor(
 
     fun updateList() {
         viewModelScope.launch {
-            val response = repo.getRemoteUsersList("Bearer " + prefHelper.getAccessToken().toString())
+            val response = repo.getRemoteUsersList()
             val listOfUsers = response?.body()?.usersResponseList
             repo.updateLocalList(listOfUsers, listOfUsers?.size)
             _userList.value = repo.getLocalList()

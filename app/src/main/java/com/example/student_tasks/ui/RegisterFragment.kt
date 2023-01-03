@@ -11,7 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.student_tasks.R
 import com.example.student_tasks.databinding.FragmentRegisterBinding
 import com.example.student_tasks.utils.StringConstants
-import com.example.student_tasks.viewmodel.RegisterViewModel
+import com.example.student_tasks.ui.viewmodel.RegisterViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

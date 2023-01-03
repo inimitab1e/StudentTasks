@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.student_tasks.adapters.FacultyAndSpecialityListAdapter
 import com.example.student_tasks.data.model.ExpandableFacAndSpecModel
 import com.example.student_tasks.databinding.FragmentSubjectsListBinding
-import com.example.student_tasks.viewmodel.FacultyAndSpecialityListViewModel
+import com.example.student_tasks.ui.viewmodel.FacultyAndSpecialityListViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

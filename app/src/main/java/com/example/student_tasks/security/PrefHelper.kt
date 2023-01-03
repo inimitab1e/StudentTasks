@@ -9,7 +9,7 @@ class PrefHelper(context: Context) {
 
     private val PREFS_NAME = "Secret"
     private var sharedPref: SharedPreferences
-    val editor: SharedPreferences.Editor
+    private val editor: SharedPreferences.Editor
 
     init {
         sharedPref = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
@@ -23,17 +23,16 @@ class PrefHelper(context: Context) {
             .apply()
     }
 
-    fun getAccessToken(): String? {
-        return sharedPref.getString("AccessToken", null)
-    }
+    fun deleteKey(key: String) {
+        editor.remove(key)
+            .apply()
+     }
 
-    fun getRefreshToken(): String? {
-        return sharedPref.getString("RefreshToken", null)
-    }
+    fun getAccessToken(): String? = sharedPref.getString("AccessToken", null)
 
-    fun getUserEmail(): String? {
-        return sharedPref.getString("Email", null)
-    }
+    fun getRefreshToken(): String? = sharedPref.getString("RefreshToken", null)
+
+    fun getUserEmail(): String? = sharedPref.getString("Email", null)
 
     fun clear() {
         editor.clear()
