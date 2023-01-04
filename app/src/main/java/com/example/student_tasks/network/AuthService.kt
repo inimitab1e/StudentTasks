@@ -16,10 +16,10 @@ interface AuthService {
     suspend fun login(@Body loginRequest: LoginRequest): Response<AuthResponse>
 
     @GET("/validity")
-    suspend fun checkAccessTokenValidity() : Response<ValidityResponse>
+    suspend fun checkAccessTokenValidity() : Result<ValidityResponse>
 
     @POST("/refresh")
-    suspend fun refreshTokens(@Body refreshRequest: RefreshRequest): Response<AuthResponse>
+    suspend fun refreshTokens(@Body refreshRequest: RefreshRequest): Result<AuthResponse>
 
     @GET("/users")
     suspend fun updateUsersList(): Response<UsersListResponse>

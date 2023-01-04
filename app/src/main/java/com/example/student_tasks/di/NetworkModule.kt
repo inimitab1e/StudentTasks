@@ -2,6 +2,7 @@ package com.example.student_tasks.di
 
 import android.content.Context
 import com.example.student_tasks.network.AuthService
+import com.example.student_tasks.network.exceptions.ResultCallAdapterFactory
 import com.example.student_tasks.security.PrefHelper
 import com.example.student_tasks.utils.*
 import dagger.Module
@@ -9,7 +10,6 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -52,6 +52,7 @@ object NetworkModule {
             .baseUrl("http://10.0.2.2:8080")
             .client(mOkHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(ResultCallAdapterFactory())
             .build()
     }
 

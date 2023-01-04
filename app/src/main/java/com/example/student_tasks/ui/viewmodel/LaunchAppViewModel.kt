@@ -9,7 +9,6 @@ import com.example.student_tasks.security.PrefHelper
 import com.example.student_tasks.utils.StringConstants
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -32,10 +31,8 @@ class LaunchAppViewModel @Inject constructor(
             if (prefHelper.getUserEmail() == null) {
                 _userExists.postValue(StringConstants.userNotExists)
             } else if (isAccessTokenValid()) {
-                Timber.e("awdawd")
                 _isTokenValid.postValue(StringConstants.tokenIsValid)
             } else {
-
                 refreshTokens()
             }
         }
@@ -44,7 +41,6 @@ class LaunchAppViewModel @Inject constructor(
     private fun refreshTokens() {
         viewModelScope.launch {
             prefHelper.deleteKey(key = "AccessToken")
-            Timber.d("Access token after delete" + prefHelper.getAccessToken())
             val email = prefHelper.getUserEmail().toString()
             val refreshRequest = RefreshRequest(
                 email = email
@@ -52,24 +48,22 @@ class LaunchAppViewModel @Inject constructor(
             val response = launchAppRepo.refreshTokens(
                 refreshRequest = refreshRequest
             )
-            if (response?.errorBody() == null) {
+            if (response != null) {
                 prefHelper.clear()
                 prefHelper.saveUserInfo(
-                    response?.body()?.accessToken,
-                    response?.body()?.refreshToken,
+                    response.accessToken,
+                    response.refreshToken,
                     email
                 )
                 _isRefreshSuccess.postValue(StringConstants.refreshSuccess)
             } else {
                 _isRefreshSuccess.postValue(StringConstants.refreshFailed)
             }
-            Timber.d("Access token install" + prefHelper.getAccessToken())
         }
     }
 
     private suspend fun isAccessTokenValid(): Boolean {
         val response = launchAppRepo.checkTokenValidity()
-        Timber.e(response.toString())
-        return (response?.errorBody() != null)
+        return (response == null)
     }
 }

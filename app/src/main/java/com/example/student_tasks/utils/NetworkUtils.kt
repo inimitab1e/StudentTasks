@@ -6,7 +6,6 @@ import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.chuckerteam.chucker.api.RetentionManager
 import com.example.student_tasks.security.PrefHelper
 import okhttp3.Interceptor
-import timber.log.Timber
 
 private fun collector(context: Context) = ChuckerCollector(
     context = context,
@@ -48,7 +47,6 @@ fun createAuthorizationInterceptor(prefHelper: PrefHelper): Interceptor {
     return Interceptor { chain ->
         val newBuilder = chain.request().newBuilder()
         val accessToken = prefHelper.getAccessToken()
-        Timber.e("QWEQWEQWE $accessToken")
         val refreshToken = prefHelper.getRefreshToken()
         if (accessToken != null) {
             newBuilder.addHeader("Authorization", StringConstants.bearerHeader + accessToken)

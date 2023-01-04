@@ -11,7 +11,6 @@ import com.example.student_tasks.R
 import com.example.student_tasks.utils.StringConstants
 import com.example.student_tasks.ui.viewmodel.LaunchAppViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 
 @AndroidEntryPoint
 class LaunchAppFragment : Fragment() {

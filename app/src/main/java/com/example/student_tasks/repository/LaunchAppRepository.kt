@@ -11,11 +11,20 @@ import javax.inject.Inject
 class LaunchAppRepository @Inject constructor(
     private val authService: AuthService
 ): LaunchAppInterface {
-    override suspend fun checkTokenValidity(): Response<ValidityResponse> {
-        return authService.checkAccessTokenValidity()
+    override suspend fun checkTokenValidity(): ValidityResponse? {
+        authService.checkAccessTokenValidity().onSuccess {
+            return it
+        }
+            .onFailure {
+                return null
+            }
+        return null
     }
 
-    override suspend fun refreshTokens(refreshRequest: RefreshRequest) : Response<AuthResponse> {
-        return authService.refreshTokens(refreshRequest = refreshRequest)
+    override suspend fun refreshTokens(refreshRequest: RefreshRequest) : AuthResponse? {
+        authService.refreshTokens(refreshRequest = refreshRequest).onSuccess {
+            return it
+        }
+        return null
     }
 }

@@ -7,4 +7,5 @@ object StringConstants {
     const val refreshSuccess = "Refresh success"
     const val refreshFailed = "Refresh failed"
     const val bearerHeader = "Bearer "
+    const val app_logic_ex_connection_ex = "Check your connection"
 }
