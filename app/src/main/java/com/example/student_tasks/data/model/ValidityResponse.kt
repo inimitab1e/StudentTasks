@@ -4,5 +4,6 @@ import com.google.gson.annotations.SerializedName
 
 data class ValidityResponse(
     @SerializedName("message")
-    val message: String
+    val message: String,
+    val errorResponse: ErrorResponse
 )

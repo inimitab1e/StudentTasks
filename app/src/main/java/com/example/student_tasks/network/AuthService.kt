@@ -1,6 +1,7 @@
 package com.example.student_tasks.network
 
 import com.example.student_tasks.data.model.*
+import com.example.student_tasks.network.exceptions.NetworkResponse
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -16,10 +17,10 @@ interface AuthService {
     suspend fun login(@Body loginRequest: LoginRequest): Response<AuthResponse>
 
     @GET("/validity")
-    suspend fun checkAccessTokenValidity() : Result<ValidityResponse>
+    suspend fun checkAccessTokenValidity() : NetworkResponse<ValidityResponse, ErrorResponse>
 
     @POST("/refresh")
-    suspend fun refreshTokens(@Body refreshRequest: RefreshRequest): Result<AuthResponse>
+    suspend fun refreshTokens(@Body refreshRequest: RefreshRequest): NetworkResponse<AuthResponse, ErrorResponse>
 
     @GET("/users")
     suspend fun updateUsersList(): Response<UsersListResponse>
