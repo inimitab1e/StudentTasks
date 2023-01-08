@@ -40,6 +40,14 @@ class StudentsListFragment : Fragment() {
         bottomNavigation?.isVisible = true
 
         studentListViewModel.updateList()
+
+        studentListViewModel.userList.observe(viewLifecycleOwner) {
+            with(usersAdapter) {
+                setUsers(it)
+                notifyDataSetChanged()
+            }
+        }
+
         binding!!.apply {
             rwStudentsList.apply {
                 layoutManager = LinearLayoutManager(activity)
@@ -51,11 +59,13 @@ class StudentsListFragment : Fragment() {
                 studentListViewModel.logout()
                 findNavController().navigate(R.id.action_studentsListFragment_to_loginFragment)
             }
-        }
 
-        studentListViewModel.userList.observe(viewLifecycleOwner) {
-            with(usersAdapter) {
-                setUsers(it)
+            refreshLayout.setOnRefreshListener {
+                refreshLayout.isRefreshing = false
+                studentListViewModel.updateList()
+                shimmerViewContainer.stopShimmerAnimation()
+                shimmerViewContainer.is
+                usersAdapter.notifyDataSetChanged()
             }
         }
     }

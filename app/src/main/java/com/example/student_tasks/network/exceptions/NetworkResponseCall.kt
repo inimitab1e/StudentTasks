@@ -10,8 +10,7 @@ import retrofit2.Response
 import java.io.IOException
 
 internal class NetworkResponseCall<S : Any, E : Any>(
-    private val delegate: Call<S>,
-    private val errorConverter: Converter<ResponseBody, E>
+    private val delegate: Call<S>, private val errorConverter: Converter<ResponseBody, E>
 ) : Call<NetworkResponse<S, E>> {
 
     override fun enqueue(callback: Callback<NetworkResponse<S, E>>) {
