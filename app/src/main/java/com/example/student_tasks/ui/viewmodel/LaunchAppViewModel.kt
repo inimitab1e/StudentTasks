@@ -39,24 +39,22 @@ class LaunchAppViewModel @Inject constructor(
         }
     }
 
-    private fun refreshTokens() {
-        viewModelScope.launch {
-            prefHelper.deleteKey(key = "AccessToken")
-            val email = prefHelper.getUserEmail().toString()
-            val refreshRequest = RefreshRequest(
-                email = email
+    private suspend fun refreshTokens() {
+        prefHelper.deleteKey(key = "AccessToken")
+        val email = prefHelper.getUserEmail().toString()
+        val refreshRequest = RefreshRequest(
+            email = email
+        )
+        val response = launchAppRepo.refreshTokens(
+            refreshRequest = refreshRequest
+        )
+        when (response) {
+            is NetworkResponse.Success -> changeTokensValue(
+                response.body.accessToken,
+                response.body.refreshToken,
+                email
             )
-            val response = launchAppRepo.refreshTokens(
-                refreshRequest = refreshRequest
-            )
-            when (response) {
-                is NetworkResponse.Success -> changeTokensValue(
-                    response.body.accessToken,
-                    response.body.refreshToken,
-                    email
-                )
-                else -> _isRefreshSuccess.postValue(StringConstants.refreshFailed)
-            }
+            else -> _isRefreshSuccess.postValue(StringConstants.refreshFailed)
         }
     }
 

@@ -36,7 +36,8 @@ class StudentsListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val bottomNavigation = activity?.findViewById<BottomNavigationView>(R.id.bottomNavigationView)
+        val bottomNavigation =
+            activity?.findViewById<BottomNavigationView>(R.id.bottomNavigationView)
         bottomNavigation?.isVisible = true
 
         studentListViewModel.updateList()
@@ -45,6 +46,17 @@ class StudentsListFragment : Fragment() {
             with(usersAdapter) {
                 setUsers(it)
                 notifyDataSetChanged()
+            }
+
+            binding!!.apply {
+                refreshLayout.setOnRefreshListener {
+                    refreshLayout.isRefreshing = false
+                    studentListViewModel.updateList()
+                    with(usersAdapter) {
+                        setUsers(it)
+                        notifyDataSetChanged()
+                    }
+                }
             }
         }
 
@@ -58,14 +70,6 @@ class StudentsListFragment : Fragment() {
                 bottomNavigation?.isGone = true
                 studentListViewModel.logout()
                 findNavController().navigate(R.id.action_studentsListFragment_to_loginFragment)
-            }
-
-            refreshLayout.setOnRefreshListener {
-                refreshLayout.isRefreshing = false
-                studentListViewModel.updateList()
-                shimmerViewContainer.stopShimmerAnimation()
-                shimmerViewContainer.is
-                usersAdapter.notifyDataSetChanged()
             }
         }
     }
