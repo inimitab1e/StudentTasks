@@ -71,14 +71,6 @@ class StudentsListFragment : Fragment() {
                 studentListViewModel.logout()
                 findNavController().navigate(R.id.action_studentsListFragment_to_loginFragment)
             }
-<<<<<<< Updated upstream
-=======
-
-            refreshLayout.setOnRefreshListener {
-                studentListViewModel.updateList()
-                usersAdapter.notifyDataSetChanged()
-            }
->>>>>>> Stashed changes
         }
     }
 

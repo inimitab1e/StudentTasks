@@ -3,6 +3,7 @@ package com.example.student_tasks.di
 import android.content.Context
 import com.example.student_tasks.network.AuthService
 import com.example.student_tasks.network.exceptions.NetworkResponseAdapterFactory
+import com.example.student_tasks.network.utils.*
 import com.example.student_tasks.security.PrefHelper
 import com.example.student_tasks.utils.*
 import dagger.Module

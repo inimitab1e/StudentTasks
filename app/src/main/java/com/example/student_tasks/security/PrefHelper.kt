@@ -9,10 +9,18 @@ class PrefHelper(context: Context) {
 
     private val PREFS_NAME = "Secret"
     private var sharedPref: SharedPreferences
+    private val masterKeyAlias = MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC)
+
     private val editor: SharedPreferences.Editor
 
     init {
-        sharedPref = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        sharedPref = EncryptedSharedPreferences.create(
+            PREFS_NAME,
+            masterKeyAlias,
+            context,
+            EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+            EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+        )
         editor = sharedPref.edit()
     }
 

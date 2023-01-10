@@ -1,10 +1,11 @@
-package com.example.student_tasks.utils
+package com.example.student_tasks.network.utils
 
 import android.content.Context
 import com.chuckerteam.chucker.api.ChuckerCollector
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.chuckerteam.chucker.api.RetentionManager
 import com.example.student_tasks.security.PrefHelper
+import com.example.student_tasks.utils.StringConstants
 import okhttp3.Interceptor
 
 private fun collector(context: Context) = ChuckerCollector(
