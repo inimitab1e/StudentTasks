@@ -11,7 +11,6 @@ import timber.log.Timber.*
 
 @HiltAndroidApp
 class MainApp: Application() {
-    private lateinit var analytics: FirebaseAnalytics
     override fun onCreate() {
         super.onCreate()
         if (BuildConfig.DEBUG) {
@@ -24,7 +23,5 @@ class MainApp: Application() {
             }
             Timber.e(task.result)
         }
-
-        analytics = Firebase.analytics
     }
 }
