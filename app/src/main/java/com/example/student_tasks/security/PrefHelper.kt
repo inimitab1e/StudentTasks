@@ -43,7 +43,9 @@ class PrefHelper(context: Context) {
     fun getUserEmail(): String? = sharedPref.getString("Email", null)
 
     fun clear() {
-        editor.clear()
+        editor.remove("AccessToken")
+            .remove("RefreshToken")
+            .remove("Email")
             .apply()
     }
 }
